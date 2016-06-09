@@ -3,8 +3,11 @@
     <!-- Theme -->
     <color name="Primary">#FFFFCC</color>
     <color name="PrimaryDark">#FFFFCC</color>
-    <!-- Background -->
+    <!-- Main  -->
     <color name="MainBackground">#FFFFCC</color>
+    <!-- CrossView -->
+    <color name="cross_color">#ffffffff</color>
+    <color name="circle_image_color_yellow">#fffece55</color>
     <!-- Don't know where to use -->
     <color name="colorAccent">#FF4081</color>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- widget_album_cover will be used in AlbumBotView, all members should be accessed by it. -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90dp"
+    android:layout_height="120dp"
+    android:gravity="center_horizontal"
+    android:padding="5dp"
+    android:orientation="vertical"
+    android:background="#ffebebeb">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:text="album_title"/>
+
+</LinearLayout>
