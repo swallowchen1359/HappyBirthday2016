@@ -11,8 +11,8 @@ import com.studio.swallowcharchar.happybirthday2016.widget.PageController;
  * Created by Swallow on 6/10/16.
  */
 public class TheaterController extends PageController {
-    public TheaterController(Context context, ViewGroup topContainer, ViewGroup botContainer) {
-        super(context, topContainer, botContainer);
+    public TheaterController(Context context, ViewGroup rootContainer, ViewGroup topContainer, ViewGroup botContainer) {
+        super(context, rootContainer, topContainer, botContainer);
     }
 
     @Override

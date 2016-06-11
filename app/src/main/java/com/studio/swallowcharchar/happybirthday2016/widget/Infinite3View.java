@@ -173,6 +173,10 @@ public class Infinite3View extends RelativeLayout {
         }
     }
 
+    public int getOneViewWidth() {
+        return mOneViewWidth;
+    }
+
     private void refreshLinkedListOrder(int moveToLeftOrRight) {
         ViewGroup oriLeft = mThreeViewLL.get(LEFT_VIEW_INDEX);
         ViewGroup oriRight = mThreeViewLL.get(RIGHT_VIEW_INDEX);

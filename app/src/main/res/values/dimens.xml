@@ -12,5 +12,6 @@
     <dimen name="album_cover_height">120dp</dimen>
 
     <!-- Infinite3View Dimension -->
-    <dimen name="three_view_margin">20dp</dimen>
+    <dimen name="three_view_margin">60dp</dimen>
+
 </resources>

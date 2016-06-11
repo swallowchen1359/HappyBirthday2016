@@ -11,10 +11,11 @@ import com.studio.swallowcharchar.happybirthday2016.MainTopView;
  */
 public abstract class PageController {
     private Context mContext;
-    private ViewGroup mTopContainer, mBotContainer;
+    private ViewGroup mRootContainer, mTopContainer, mBotContainer;
 
-    public PageController(Context context, ViewGroup topContainer, ViewGroup botContainer) {
+    public PageController(Context context, ViewGroup rootContainer, ViewGroup topContainer, ViewGroup botContainer) {
         mContext = context;
+        mRootContainer = rootContainer;
         mTopContainer = topContainer;
         mBotContainer = botContainer;
     }
@@ -23,6 +24,9 @@ public abstract class PageController {
         return mContext;
     }
 
+    public ViewGroup getRootContainer() {
+        return mRootContainer;
+    }
     public ViewGroup getTopContainer() {
         return mTopContainer;
     }

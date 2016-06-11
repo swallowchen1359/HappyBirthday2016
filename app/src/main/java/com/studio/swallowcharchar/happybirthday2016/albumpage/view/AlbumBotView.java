@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -19,9 +20,13 @@ import java.util.LinkedList;
  * which is used to put all widget_album_cover
  */
 public class AlbumBotView extends ScrollView implements MainBotView {
+    public interface AlbumOnClickListener {
+        void albumOnClickListener(int albumIndex);
+    }
     /** mContainer is the only child will be put into AlbumBotView */
     private AlbumContainer mContainer;
     private LinkedList<AlbumCover> mAlbumCoverList;
+    private AlbumOnClickListener mAlbumOnClickListener;
 
     public AlbumBotView(Context context) {
         this(context, null);
@@ -50,12 +55,23 @@ public class AlbumBotView extends ScrollView implements MainBotView {
      * @return number of attached album
      * */
     public int attachAlbum() {
+        AlbumCover albumCover;
         AlbumRowContainer albumRowContainer = new AlbumRowContainer(getContext());
         for (int i = 0; i < mAlbumCoverList.size(); i++) {
             if (albumRowContainer.getChildCount() == AlbumRowContainer.ROW_MAXIMUM_ALBUM) {
                 albumRowContainer = new AlbumRowContainer(getContext());
             }
-            albumRowContainer.addNewAlbumCover(mAlbumCoverList.get(i));
+            final int albumIndex = i;
+            albumCover = mAlbumCoverList.get(i);
+            albumCover.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mAlbumOnClickListener != null) {
+                        mAlbumOnClickListener.albumOnClickListener(albumIndex);
+                    }
+                }
+            });
+            albumRowContainer.addNewAlbumCover(albumCover);
             if (albumRowContainer.getChildCount() == AlbumRowContainer.ROW_MAXIMUM_ALBUM || i == mAlbumCoverList.size() - 1) {
                 mContainer.addNewAlbumRowContainer(albumRowContainer);
             }
@@ -70,6 +86,18 @@ public class AlbumBotView extends ScrollView implements MainBotView {
     public int addAlbum(AlbumCover album) {
         mAlbumCoverList.add(album);
         return mAlbumCoverList.size();
+    }
+
+    public AlbumCover getAlbumCoverAt(int albumIndex) {
+        if (albumIndex < 0 || albumIndex > mAlbumCoverList.size()) {
+            return null;
+        }
+
+        return mAlbumCoverList.get(albumIndex);
+    }
+
+    public void setAlbumOnClickListener(AlbumOnClickListener listener) {
+        mAlbumOnClickListener = listener;
     }
 
     /**
@@ -137,6 +165,7 @@ public class AlbumBotView extends ScrollView implements MainBotView {
     public class AlbumCover extends LinearLayout {
         /** The VIEW_RES_ID is used to inflate */
         private static final int VIEW_RES_ID = R.layout.widget_album_cover;
+        private static final int VIEW_ALBUM_COVER_IMG_RES_ID = R.id.album_cover_image;
         private static final int ALBUM_WIDTH_RES_ID = R.dimen.album_cover_width;
         private static final int ALBUM_HEIGHT_RES_ID = R.dimen.album_cover_height;
 
@@ -150,10 +179,12 @@ public class AlbumBotView extends ScrollView implements MainBotView {
             int albumWidth, albumHeight;
 
             setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+            setClipChildren(false);
             mAlbumCoverContainer = (ViewGroup) ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_RES_ID, null, false);
             albumWidth = (int) (getResources().getDimension(ALBUM_WIDTH_RES_ID));
             albumHeight = (int) (getResources().getDimension(ALBUM_HEIGHT_RES_ID));
             mAlbumCoverContainer.setLayoutParams(new LayoutParams(albumWidth, albumHeight));
+            mAlbumCoverContainer.setClipChildren(false);
             addView(mAlbumCoverContainer);
         }
 
@@ -163,6 +194,10 @@ public class AlbumBotView extends ScrollView implements MainBotView {
 
         public void setAlbumDescription() {
 
+        }
+
+        public View getAlbumCoverImage() {
+            return mAlbumCoverContainer.findViewById(VIEW_ALBUM_COVER_IMG_RES_ID);
         }
     }
 }

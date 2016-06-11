@@ -34,6 +34,7 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
     private AlbumController mAlbumController;
     private TheaterController mTheaterController;
 
+    private ViewGroup mRootContainer;
     private ViewGroup mTopContainer;
     private ViewGroup mBotContainer;
 
@@ -56,7 +57,8 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(VIEW_RES_ID, container, false);
+        ViewGroup fragmentView = (ViewGroup) inflater.inflate(VIEW_RES_ID, container, false);
+        mRootContainer = container;
         mTopContainer = (ViewGroup) fragmentView.findViewById(VIEW_TOP_RES_ID);
         mBotContainer = (ViewGroup) fragmentView.findViewById(VIEW_BOT_RES_ID);
         /** Put BirthdayCardTop/BotView for first page, and testing */
@@ -68,7 +70,7 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
          * Using BirthdayCardController as init controller, controller will be attached according
          * to current showing page.
          * */
-        mBirthdayCardController = new BirthdayCardController(getContext(), mTopContainer, mBotContainer);
+        mBirthdayCardController = new BirthdayCardController(getContext(), mRootContainer, mTopContainer, mBotContainer);
         mPageController = mBirthdayCardController;
         return fragmentView;
     }
@@ -102,7 +104,7 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
                 break;
             case PAGE_ALBUM:
                 if (mAlbumController == null) {
-                    mAlbumController = new AlbumController(getContext(), mTopContainer, mBotContainer);
+                    mAlbumController = new AlbumController(getContext(), mRootContainer, mTopContainer, mBotContainer);
                 }
                 mPageController = mAlbumController;
                 break;

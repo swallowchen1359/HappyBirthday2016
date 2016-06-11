@@ -6,31 +6,49 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Rect;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 
 import com.studio.swallowcharchar.happybirthday2016.MainBotView;
 import com.studio.swallowcharchar.happybirthday2016.MainTopView;
+import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumBotView;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumTopView;
 import com.studio.swallowcharchar.happybirthday2016.widget.PageController;
+import com.studio.swallowcharchar.happybirthday2016.widget.Utility;
 
 /**
  * Created by Swallow on 6/10/16.
  */
-public class AlbumController extends PageController {
+public class AlbumController extends PageController implements AlbumBotView.AlbumOnClickListener {
+    private static final int FSM_HOME = 0;
+    private static final int FSM_DETAIL = 1;
+
+    private static int sAlbumFSM;
+
+    private Context mContext;
+    private ViewGroup mRootContainer;
     private ViewGroup mTopContainer;
     private ViewGroup mBotContainer;
 
     private AlbumTopView mAlbumTopView;
     private AlbumBotView mAlbumBotView;
 
-    public AlbumController(Context context, ViewGroup topContainer, ViewGroup botContainer) {
-        super(context, topContainer, botContainer);
+    public AlbumController(Context context, ViewGroup rootContainer, ViewGroup topContainer, ViewGroup botContainer) {
+        super(context, rootContainer, topContainer, botContainer);
+        mContext = context;
+        mRootContainer = getRootContainer();
         mTopContainer = getTopContainer();
         mBotContainer = getBotContainer();
         mAlbumTopView = new AlbumTopView(context);
         mAlbumBotView = new AlbumBotView(context);
+        sAlbumFSM = -1;
+        mAlbumBotView.setAlbumOnClickListener(this);
     }
 
     @Override
@@ -99,5 +117,60 @@ public class AlbumController extends PageController {
         mBotContainer.setLayoutTransition(layoutBotTransition);
         mBotContainer.removeViewAt(0);
         mBotContainer.addView(mAlbumBotView);
+        sAlbumFSM = FSM_HOME;
+    }
+
+    public void changeSelectedAlbum(int albumIndex) {
+        int sliceCoordinate[] = new int[2];
+        int albumCoordinate[] = new int[2];
+        Rect sliceRect = new Rect();
+        Rect albumRect = new Rect();
+        AlbumBotView.AlbumCover albumCover;
+        /** Slice is the center view of Infinite3View, i.e., AlbumTopView */
+        float slicePositionX, slicePositionY, sliceWidth, sliceHeight;
+        /** Album will be the selected album, if albumIndex is valid. */
+        float albumPositionX, albumPositionY, albumWidth, albumHeight;
+        Animator albumAnimator;
+        PropertyValuesHolder albumTransX, albumTransY, albumScaleX, albumScaleY;
+
+        if (albumIndex < 0 /*|| sAlbumFSM != FSM_HOME*/) {
+            return;
+        }
+
+        /** if index and state is valid, using slice and album position to do animation */
+        ((ViewGroup)mAlbumTopView.getCurrentItem()).getChildAt(0).getLocationInWindow(sliceCoordinate);
+        albumCover = mAlbumBotView.getAlbumCoverAt(albumIndex);
+        Utility.setAllParentsClip(albumCover.getAlbumCoverImage(), false);
+        albumCover.getAlbumCoverImage().getLocationInWindow(albumCoordinate);
+        albumCover.getAlbumCoverImage().setPivotX(0);
+        albumCover.getAlbumCoverImage().setPivotY(0);
+        slicePositionX = sliceCoordinate[0];
+        slicePositionY = sliceCoordinate[1];
+        sliceWidth = ((ViewGroup)mAlbumTopView.getCurrentItem()).getChildAt(0).getMeasuredWidth() * mTopContainer.getScaleX();
+        sliceHeight = ((ViewGroup)mAlbumTopView.getCurrentItem()).getChildAt(0).getMeasuredHeight() * mTopContainer.getScaleY();
+        albumPositionX = albumCoordinate[0];
+        albumPositionY = albumCoordinate[1];
+        albumWidth = albumCover.getAlbumCoverImage().getMeasuredWidth();
+        albumHeight = albumCover.getAlbumCoverImage().getMeasuredHeight();
+        Log.d("AlbumController", "sliceX " +slicePositionX+ " sliceY " +slicePositionY);
+        Log.d("AlbumController", "albumX " +albumPositionX+ " albumY " +albumPositionY);
+        albumTransX = PropertyValuesHolder.ofFloat("translationX", 0f, slicePositionX - albumPositionX);
+        albumTransY = PropertyValuesHolder.ofFloat("translationY", 0f, slicePositionY - albumPositionY);
+        albumScaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, sliceWidth / albumWidth);
+        albumScaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, sliceHeight / albumHeight);
+        /** Because AlbumCover cannot cross over its container, using a fake ImageView */
+        albumAnimator = ObjectAnimator.ofPropertyValuesHolder(albumCover.getAlbumCoverImage(), albumTransX, albumTransY, albumScaleX, albumScaleY);
+        albumAnimator.setDuration(300);
+        albumAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
+        albumAnimator.start();
+
+        /** change FSM if it is a successful procedure */
+        sAlbumFSM = FSM_DETAIL;
+    }
+
+    /*********************** Implement AlbumBotView.AlbumOnClickListener **************************/
+    @Override
+    public void albumOnClickListener(int albumIndex) {
+        changeSelectedAlbum(albumIndex);
     }
 }
