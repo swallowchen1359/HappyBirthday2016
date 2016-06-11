@@ -2,8 +2,9 @@ package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -31,6 +32,17 @@ public class AlbumBotView extends ScrollView implements MainBotView {
         setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         mAlbumCoverList = new LinkedList<>();
         initContainer();
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        addAlbum(new AlbumCover(context));
+        attachAlbum();
     }
 
     /**
@@ -38,8 +50,15 @@ public class AlbumBotView extends ScrollView implements MainBotView {
      * @return number of attached album
      * */
     public int attachAlbum() {
+        AlbumRowContainer albumRowContainer = new AlbumRowContainer(getContext());
         for (int i = 0; i < mAlbumCoverList.size(); i++) {
-            mContainer.addView(mAlbumCoverList.get(i));
+            if (albumRowContainer.getChildCount() == AlbumRowContainer.ROW_MAXIMUM_ALBUM) {
+                albumRowContainer = new AlbumRowContainer(getContext());
+            }
+            albumRowContainer.addNewAlbumCover(mAlbumCoverList.get(i));
+            if (albumRowContainer.getChildCount() == AlbumRowContainer.ROW_MAXIMUM_ALBUM || i == mAlbumCoverList.size() - 1) {
+                mContainer.addNewAlbumRowContainer(albumRowContainer);
+            }
         }
         return 0;
     }
@@ -50,7 +69,7 @@ public class AlbumBotView extends ScrollView implements MainBotView {
      * */
     public int addAlbum(AlbumCover album) {
         mAlbumCoverList.add(album);
-        return 0;
+        return mAlbumCoverList.size();
     }
 
     /**
@@ -58,58 +77,57 @@ public class AlbumBotView extends ScrollView implements MainBotView {
      * */
     private void initContainer() {
         mContainer = new AlbumContainer(getContext());
-        mContainer.setLayoutParams(
-                new LinearLayout.LayoutParams(
-                        LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
         addView(mContainer);
     }
 
     /**
-     * AlbumContainer is a special LinearLayout that will only put ROW_MAXIMUM_ALBUM number
-     * item into one row, the other items will move to the next row.
+     * AlbumContainer is a vertical arrangement LinearLayout, can put a lots of row of AlbumRowContainer
      * */
     private class AlbumContainer extends LinearLayout {
-        /** Only ROW_MAXIMUM_ALBUM number item want to be put into the container */
-        private static final int ROW_MAXIMUM_ALBUM = 3;
+
         public AlbumContainer(Context context) {
             this(context, null);
         }
 
         public AlbumContainer(Context context, AttributeSet attrs) {
             super(context, attrs);
+            setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            setOrientation(VERTICAL);
         }
 
-        @Override
-        protected void onLayout(boolean changed, int l, int t, int r, int b) {
-//            super.onLayout(changed, l, t, r, b);
-            int i;
-            int paintPositionX, paintPositionY;
+        public void addNewAlbumRowContainer(AlbumRowContainer albumRowContainer) {
+            LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0, 0, 0, 20);
+            albumRowContainer.setLayoutParams(layoutParams);
+            addView(albumRowContainer);
+        }
+    }
 
-            int childCount = this.getChildCount();
-            int childWidth, childHeight;
-            int marginHorizontal, marginVertical;
-            if (childCount < 1) {
+    /** AlbumRowContainer is a horizontal arrangement LinearLayout, can put 3 AlbumCovers */
+    private class AlbumRowContainer extends LinearLayout {
+        private static final int ROW_MAXIMUM_ALBUM = 3;
+        private int mAlbumCoverInRowCount;
+        public AlbumRowContainer(Context context) {
+            this(context, null);
+        }
+
+        public AlbumRowContainer(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            setOrientation(HORIZONTAL);
+            mAlbumCoverInRowCount = 0;
+        }
+
+        public void addNewAlbumCover(AlbumCover albumCover) {
+            LayoutParams layoutParams;
+            if (mAlbumCoverInRowCount >= ROW_MAXIMUM_ALBUM) {
                 return;
             }
-
-            /** Because all album size should be the same, use first child to measure dimension */
-            childWidth = this.getChildAt(0).getMeasuredWidth();
-            childHeight = this.getChildAt(0).getMeasuredHeight();
-            if (getMeasuredWidth() < ROW_MAXIMUM_ALBUM * childWidth) {
-                return;
-            }
-            /** All margins are set to equal. 3 items contain 4 margins, including start and end */
-            marginHorizontal = (getMeasuredWidth() - ROW_MAXIMUM_ALBUM * childWidth) / (ROW_MAXIMUM_ALBUM + 1);
-            marginVertical = marginHorizontal;
-
-            for (i = 0; i < childCount; i++) {
-                View childView = this.getChildAt(i);
-                /** X is determined by index 0, 1, 2 in one row, using % */
-                paintPositionX = l + marginHorizontal + (i % ROW_MAXIMUM_ALBUM) * (childWidth + marginHorizontal);
-                /** Y is determined by which column is belongs to, using / */
-                paintPositionY = t + marginVertical + (i / ROW_MAXIMUM_ALBUM) * (childHeight + marginVertical);
-                childView.layout(paintPositionX, paintPositionY, paintPositionX + childWidth, paintPositionY + childHeight);
-            }
+            layoutParams = new LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.0f);
+            albumCover.setGravity(Gravity.CENTER_HORIZONTAL);
+            albumCover.setLayoutParams(layoutParams);
+            addView(albumCover);
+            mAlbumCoverInRowCount++;
         }
     }
 
@@ -119,6 +137,8 @@ public class AlbumBotView extends ScrollView implements MainBotView {
     public class AlbumCover extends LinearLayout {
         /** The VIEW_RES_ID is used to inflate */
         private static final int VIEW_RES_ID = R.layout.widget_album_cover;
+        private static final int ALBUM_WIDTH_RES_ID = R.dimen.album_cover_width;
+        private static final int ALBUM_HEIGHT_RES_ID = R.dimen.album_cover_height;
 
         private ViewGroup mAlbumCoverContainer;
         public AlbumCover(Context context) {
@@ -127,8 +147,14 @@ public class AlbumBotView extends ScrollView implements MainBotView {
 
         public AlbumCover(Context context, AttributeSet attrs) {
             super(context, attrs);
+            int albumWidth, albumHeight;
+
             setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            mAlbumCoverContainer = (ViewGroup) ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_RES_ID, null);
+            mAlbumCoverContainer = (ViewGroup) ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_RES_ID, null, false);
+            albumWidth = (int) (getResources().getDimension(ALBUM_WIDTH_RES_ID));
+            albumHeight = (int) (getResources().getDimension(ALBUM_HEIGHT_RES_ID));
+            Log.d("AlbumBotView", "albumWidth " + albumHeight + "ALBUM_WIDTH " + getResources().getDimension(ALBUM_HEIGHT_RES_ID));
+            mAlbumCoverContainer.setLayoutParams(new LayoutParams(albumWidth, albumHeight));
             addView(mAlbumCoverContainer);
         }
 
