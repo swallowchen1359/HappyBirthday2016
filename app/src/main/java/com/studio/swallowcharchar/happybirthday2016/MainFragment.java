@@ -2,6 +2,7 @@ package com.studio.swallowcharchar.happybirthday2016;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,12 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
     private MainBotView mBotView;
 
     public MainFragment() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ((MainActivity) getActivity()).setSwitchPageButtonListener(this);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int VIEW_BUTTON_THEATER = R.id.button_to_theater;
 
     private MainFragment mMainFragment;
+    private SwitchPageButtonListener mSwitchPageButtonListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FragmentManager fragmentManager;
@@ -33,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
         initButtonListener();
     }
 
+    public void setSwitchPageButtonListener(SwitchPageButtonListener listener) {
+        mSwitchPageButtonListener = listener;
+    }
+
     private void initButtonListener() {
         View buttonAlbum = findViewById(VIEW_BUTTON_ALBUM);
         View buttonTheater = findViewById(VIEW_BUTTON_THEATER);
@@ -44,14 +49,18 @@ public class MainActivity extends AppCompatActivity {
         buttonAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMainFragment.buttonAlbumOnClick();
+                if (mSwitchPageButtonListener != null) {
+                    mSwitchPageButtonListener.buttonAlbumOnClick();
+                }
             }
         });
 
         buttonTheater.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mMainFragment.buttonTheaterOnClick();
+                if (mSwitchPageButtonListener != null) {
+                    mSwitchPageButtonListener.buttonTheaterOnClick();
+                }
             }
         });
     }
