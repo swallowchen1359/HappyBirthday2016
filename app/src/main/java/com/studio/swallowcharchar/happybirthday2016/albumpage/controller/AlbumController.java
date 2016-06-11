@@ -35,9 +35,11 @@ public class AlbumController extends PageController {
 
     @Override
     public void changePage(MainTopView preTopView, MainBotView preBotView) {
+        /** TODO: animation of change page should move to corresponding Top/BotView?????? */
         /** Controlling parameter for TopContainer */
         LayoutTransition layoutTopTransition = new LayoutTransition();
-        PropertyValuesHolder containerTopScaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 0.9f);
+//        PropertyValuesHolder containerTopScaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 0.9f);
+        PropertyValuesHolder containerTopScaleX = PropertyValuesHolder.ofFloat("scaleX", 1f, 1.0f);
         PropertyValuesHolder containerBotScaleY = PropertyValuesHolder.ofFloat("scaleY", 1f, 0.9f);
         ValueAnimator appearTopAnimator = ObjectAnimator.ofFloat(mTopContainer, "alpha", 0f, 1f);
         ValueAnimator vanishTopAnimator = ObjectAnimator.ofFloat(mTopContainer, "alpha", 1f, 0f);

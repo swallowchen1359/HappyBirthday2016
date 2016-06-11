@@ -153,7 +153,6 @@ public class AlbumBotView extends ScrollView implements MainBotView {
             mAlbumCoverContainer = (ViewGroup) ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_RES_ID, null, false);
             albumWidth = (int) (getResources().getDimension(ALBUM_WIDTH_RES_ID));
             albumHeight = (int) (getResources().getDimension(ALBUM_HEIGHT_RES_ID));
-            Log.d("AlbumBotView", "albumWidth " + albumHeight + "ALBUM_WIDTH " + getResources().getDimension(ALBUM_HEIGHT_RES_ID));
             mAlbumCoverContainer.setLayoutParams(new LayoutParams(albumWidth, albumHeight));
             addView(mAlbumCoverContainer);
         }
