@@ -6,20 +6,19 @@ import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Rect;
-import android.support.v4.content.ContextCompat;
+import android.transition.Visibility;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.ImageView;
 
 import com.studio.swallowcharchar.happybirthday2016.MainBotView;
 import com.studio.swallowcharchar.happybirthday2016.MainTopView;
-import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumBotView;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumTopView;
+import com.studio.swallowcharchar.happybirthday2016.widget.Infinite3View;
 import com.studio.swallowcharchar.happybirthday2016.widget.PageController;
+import com.studio.swallowcharchar.happybirthday2016.widget.PopScrollView;
 import com.studio.swallowcharchar.happybirthday2016.widget.Utility;
 
 /**
@@ -123,8 +122,6 @@ public class AlbumController extends PageController implements AlbumBotView.Albu
     public void changeSelectedAlbum(int albumIndex) {
         int sliceCoordinate[] = new int[2];
         int albumCoordinate[] = new int[2];
-        Rect sliceRect = new Rect();
-        Rect albumRect = new Rect();
         AlbumBotView.AlbumCover albumCover;
         /** Slice is the center view of Infinite3View, i.e., AlbumTopView */
         float slicePositionX, slicePositionY, sliceWidth, sliceHeight;
@@ -133,13 +130,13 @@ public class AlbumController extends PageController implements AlbumBotView.Albu
         Animator albumAnimator;
         PropertyValuesHolder albumTransX, albumTransY, albumScaleX, albumScaleY;
 
-        if (albumIndex < 0 /*|| sAlbumFSM != FSM_HOME*/) {
+        if (albumIndex < 0 || sAlbumFSM != FSM_HOME) {
             return;
         }
 
         /** if index and state is valid, using slice and album position to do animation */
         ((ViewGroup)mAlbumTopView.getCurrentItem()).getChildAt(0).getLocationInWindow(sliceCoordinate);
-        albumCover = mAlbumBotView.getAlbumCoverAt(albumIndex);
+        albumCover = mAlbumBotView.getAlbumContainer().getAlbumCoverAt(albumIndex);
         Utility.setAllParentsClip(albumCover.getAlbumCoverImage(), false);
         albumCover.getAlbumCoverImage().getLocationInWindow(albumCoordinate);
         albumCover.getAlbumCoverImage().setPivotX(0);
@@ -163,9 +160,47 @@ public class AlbumController extends PageController implements AlbumBotView.Albu
         albumAnimator.setDuration(300);
         albumAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
         albumAnimator.start();
+        albumAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
 
-        /** change FSM if it is a successful procedure */
-        sAlbumFSM = FSM_DETAIL;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                /** change FSM if it is a successful procedure */
+                sAlbumFSM = FSM_DETAIL;
+                showAlbumDetailAtBot();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    public void showAlbumDetailAtBot() {
+        if (sAlbumFSM != FSM_DETAIL) {
+            return;
+        }
+        mAlbumBotView.getAlbumContainer().setVisibility(View.GONE);
+        mAlbumBotView.initAlbumDetailScrollView();
+        mAlbumBotView.getAlbumDetailScrollView().setOnFocusedItemChangedListener(new PopScrollView.OnFocusedItemChangedListener() {
+            @Override
+            public void onFocusedItemChanged(int currentIndex, int previousIndex) {
+                if (currentIndex > previousIndex) {
+                    mAlbumTopView.setCurrentItem(Infinite3View.RIGHT_VIEW_INDEX);
+                } else {
+                    mAlbumTopView.setCurrentItem(Infinite3View.LEFT_VIEW_INDEX);
+                }
+            }
+        });
     }
 
     /*********************** Implement AlbumBotView.AlbumOnClickListener **************************/

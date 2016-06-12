@@ -8,6 +8,10 @@
     <!-- CrossView -->
     <color name="cross_color">#FFFFFFFF</color>
     <color name="circle_image_color_yellow">#FFFECE55</color>
+    <!-- PopScrollView -->
+    <color name="widget_pop_list_item_focused">#FFFECE55</color>
+    <color name="widget_pop_list_item0_border_bottom_color">#FF9CE7D3</color>
+    <color name="widget_pop_details_color">#FFD3AC49</color>
     <!-- Don't know where to use -->
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#FF000000</color>
