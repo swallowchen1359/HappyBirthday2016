@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.controller.AlbumController;
 import com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.controller.BirthdayCardController;
 import com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.view.BirthdayCardBotView;
-import com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.view.BirthdayCardTopView;
+import com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.view.BIrthdayCardTopView;
 import com.studio.swallowcharchar.happybirthday2016.theaterpage.controller.TheaterController;
 import com.studio.swallowcharchar.happybirthday2016.widget.PageController;
 
@@ -63,7 +63,7 @@ public class MainFragment extends Fragment implements MainActivity.SwitchPageBut
         mBotContainer = (ViewGroup) fragmentView.findViewById(VIEW_BOT_RES_ID);
         /** Put BirthdayCardTop/BotView for first page, and testing */
         /** TODO: move to BirthdayCardController later */
-        mTopContainer.addView(new BirthdayCardTopView(getContext()));
+        mTopContainer.addView(new BIrthdayCardTopView(getContext()));
         mBotContainer.addView(new BirthdayCardBotView(getContext()));
 
         /**

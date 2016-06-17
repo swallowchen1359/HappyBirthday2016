@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.studio.swallowcharchar.happybirthday2016.MainTopView;
@@ -15,13 +14,13 @@ import java.util.LinkedList;
 /**
  * Created by Swallow on 6/8/16.
  */
-public class BirthdayCardTopView extends ViewPager implements MainTopView {
+public class BIrthdayCardTopView extends ViewPager implements MainTopView {
 
-    public BirthdayCardTopView(Context context) {
+    public BIrthdayCardTopView(Context context) {
         this(context, null);
     }
 
-    public BirthdayCardTopView(Context context, AttributeSet attrs) {
+    public BIrthdayCardTopView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LinkedListPagerAdapter<ImageView> adapter;
         LinkedList<ImageView> ll = new LinkedList<>();
