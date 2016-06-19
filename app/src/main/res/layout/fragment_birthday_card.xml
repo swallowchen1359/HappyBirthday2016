@@ -8,22 +8,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7" >
+        android:layout_weight="7">
 
-        <ImageView
-            android:id="@+id/image_swallow_and_panda"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:transitionName="@string/transition_image_swallow_and_panda"
-            android:src="@mipmap/swallow_and_panda"/>
+        <com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.view.BirthdayCardTopView
+            android:id="@+id/birthday_card_top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9" >
+        android:layout_weight="9">
+
+        <com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.view.BirthdayCardBotView
+            android:id="@+id/birthday_card_bot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -12,10 +12,17 @@ import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.birthdaycardpage.controller.BirthdayCardFragment;
 
 public class BirthdayCardActivity extends Activity {
+
+    /**
+     * STRING_TRANSITION_IMAGE_SWALLOW_AND_PANDA_RES_ID is used for activity transition.
+     * BirthdayCardTopView will fetch the parameter to create the shared element
+     * */
+    public static final int STRING_TRANSITION_IMAGE_SWALLOW_AND_PANDA_RES_ID = R.string.transition_image_swallow_and_panda;
+
     private static final int VIEW_RES_ID = R.layout.activity_birthday_card;
     private static final int VIEW_CONTAINER_RES_ID = R.id.birthday_card_fragment_container;
     private static final int STRING_TAG_BIRTHDAY_CARD_FRAGMENT_RES_ID = R.string.tag_birthday_card_fragment;
-    private static final int STRING_TRANSITION_IMAGE_SWALLOW_AND_PANDA_RES_ID = R.string.transition_image_swallow_and_panda;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

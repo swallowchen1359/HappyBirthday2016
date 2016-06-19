@@ -9,9 +9,6 @@ import android.widget.LinearLayout;
 import com.studio.swallowcharchar.happybirthday2016.MainTopView;
 import com.studio.swallowcharchar.happybirthday2016.widget.Infinite3View;
 
-/**
- * Created by Swallow on 6/9/16.
- */
 public class AlbumTopView extends Infinite3View implements MainTopView {
 
     private static final float DIMEN_PADDING_RATIO = 0.0625f;
