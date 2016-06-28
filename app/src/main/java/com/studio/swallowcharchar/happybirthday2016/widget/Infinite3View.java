@@ -144,7 +144,7 @@ public class Infinite3View extends RelativeLayout {
         }
         animatorCenter = ObjectAnimator.ofFloat(mThreeViewLL.get(CENTER_VIEW_INDEX), "X", mThreeViewLL.get(CENTER_VIEW_INDEX).getX(), (1 + moveToLeftOrRight) * mOneViewWidth);
         set.play(animatorCenter).with(animatorLeft).with(animatorRight);
-        set.setDuration(1000);
+        set.setDuration(50);
         set.setInterpolator(new AccelerateDecelerateInterpolator());
         set.addListener(new ThreeViewAnimatorListener(moveToLeftOrRight));
         set.start();
