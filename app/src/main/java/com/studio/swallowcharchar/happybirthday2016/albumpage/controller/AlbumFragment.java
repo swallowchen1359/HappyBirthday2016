@@ -8,23 +8,37 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.albumpage.model.AlbumModel;
+import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumBotView;
+import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumTopView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AlbumFragment extends Fragment {
     private static final int VIEW_RES_ID = R.layout.fragment_album;
+    private static final int VIEW_TOP_RES_ID = R.id.album_top;
+    private static final int VIEW_BOT_RES_ID = R.id.album_bot;
+
+    private AlbumModel mModel;
+    private AlbumTopView mAlbumTopView;
+    private AlbumBotView mAlbumBotView;
 
     public AlbumFragment() {
         // Required empty public constructor
+        mModel = new AlbumModel();
+        mModel.initModel();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(VIEW_RES_ID, container, false);
+        View mainView = inflater.inflate(VIEW_RES_ID, container, false);
+        mAlbumTopView = (AlbumTopView) mainView.findViewById(VIEW_TOP_RES_ID);
+        mAlbumBotView = (AlbumBotView) mainView.findViewById(VIEW_BOT_RES_ID);
+        mAlbumTopView.addPicture(mModel.getAlbumPictureList());
+        return mainView;
     }
 
 }
