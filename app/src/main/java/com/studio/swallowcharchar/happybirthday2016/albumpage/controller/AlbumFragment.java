@@ -17,12 +17,8 @@ import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumTopView;
  */
 public class AlbumFragment extends Fragment {
     private static final int VIEW_RES_ID = R.layout.fragment_album;
-    private static final int VIEW_TOP_RES_ID = R.id.album_top;
-    private static final int VIEW_BOT_RES_ID = R.id.album_bot;
 
     private AlbumModel mModel;
-    private AlbumTopView mAlbumTopView;
-    private AlbumBotView mAlbumBotView;
 
     public AlbumFragment() {
         // Required empty public constructor
@@ -35,9 +31,6 @@ public class AlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View mainView = inflater.inflate(VIEW_RES_ID, container, false);
-        mAlbumTopView = (AlbumTopView) mainView.findViewById(VIEW_TOP_RES_ID);
-        mAlbumBotView = (AlbumBotView) mainView.findViewById(VIEW_BOT_RES_ID);
-        mAlbumTopView.addPicture(mModel.getAlbumPictureList());
         return mainView;
     }
 

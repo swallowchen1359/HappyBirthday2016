@@ -1,4 +1,4 @@
-package com.studio.swallowcharchar.happybirthday2016;
+package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -46,7 +46,7 @@ public class AlbumCardView extends CardView {
     }
 
     public AlbumAdapter getAdapter() {
-        return mAlbumAdapter
+        return mAlbumAdapter;
     }
 
     /**
