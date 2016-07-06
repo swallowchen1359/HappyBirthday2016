@@ -1,10 +1,7 @@
 package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
-import com.studio.swallowcharchar.happybirthday2016.R;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,20 +33,23 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHol
     public AlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         /** Create a CardView, belongs to parent*/
         AlbumCardView v = new AlbumCardView(parent.getContext());
-        v.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
+        /** CardView size is specified in xml */
+        RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(0, 10, 0, 10);
+        v.setLayoutParams(layoutParams);
         AlbumViewHolder vh = new AlbumViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(AlbumViewHolder holder, int position) {
-        holder.mAlbumCardView.setAlbumDescription("TestDescription");
-        holder.mAlbumCardView.setAlbumTitle("TestTitle");
-        holder.mAlbumCardView.setAlbumImage(R.mipmap.swallow_and_panda);
+        holder.mAlbumCardView.setAlbumDescription((String) mLinkedList.get(position).get(AlbumCardView.KEY_DESCRIPTION));
+        holder.mAlbumCardView.setAlbumTitle((String) mLinkedList.get(position).get(AlbumCardView.KEY_TITLE));
+        holder.mAlbumCardView.setAlbumImage((int) mLinkedList.get(position).get(AlbumCardView.KEY_IMG_RES_ID));
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return mLinkedList.size();
     }
 }

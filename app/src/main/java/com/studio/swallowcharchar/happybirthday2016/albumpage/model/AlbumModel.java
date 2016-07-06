@@ -10,13 +10,13 @@ import java.util.LinkedList;
 public class AlbumModel {
 
     private static final int PICTURE_RES_ID_s[] = {
-            R.drawable.dsc_0052,
-            R.drawable.dsc_0156,
-            R.drawable.dsc_0238,
-            R.drawable.dsc_0867,
-            R.drawable.dsc_0872,
-            R.drawable.dsc_0923,
-            R.drawable.dsc_0937
+            R.mipmap.dsc_0052,
+            R.mipmap.dsc_0156,
+            R.mipmap.dsc_0238,
+            R.mipmap.dsc_0867,
+            R.mipmap.dsc_0872,
+            R.mipmap.dsc_0923,
+            R.mipmap.dsc_0937
     };
 
     private LinkedList<Integer> mAlbumPictureList;

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
@@ -19,7 +17,6 @@ import java.util.LinkedList;
 public class AlbumView extends RecyclerView {
     private AlbumAdapter mAlbumAdapter;
     private LinkedList<HashMap> mAlbumLinkedList;
-    private HashMap<Integer, Object> mAlbumHashMap;
     private LayoutManager mLayoutManager;
 
     public AlbumView(Context context) {
@@ -32,8 +29,22 @@ public class AlbumView extends RecyclerView {
         mLayoutManager = new LinearLayoutManager(getContext());
         setLayoutManager(mLayoutManager);
         mAlbumLinkedList = new LinkedList<>();
-        mAlbumHashMap = new HashMap<>();
         mAlbumAdapter = new AlbumAdapter(mAlbumLinkedList);
         setAdapter(mAlbumAdapter);
+    }
+
+    public void setAlbums(LinkedList<Integer> resIds) {
+        if (resIds == null) {
+            return;
+        }
+        for(int i = 0; i < resIds.size(); i++) {
+            HashMap<Integer, Object> hashMap = new HashMap<>();
+            hashMap.put(AlbumCardView.KEY_IMG_RES_ID, resIds.get(i));
+            hashMap.put(AlbumCardView.KEY_DESCRIPTION, "");
+            hashMap.put(AlbumCardView.KEY_TITLE, "");
+            mAlbumLinkedList.add(hashMap);
+        }
+
+        mAlbumAdapter.notifyDataSetChanged();
     }
 }
