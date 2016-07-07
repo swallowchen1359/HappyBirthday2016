@@ -5,8 +5,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Fragment TAGs -->
-    <string name="tag_birthday_card_fragment">BirthdayCardFragment</string>
     <string name="tag_album_fragment">AlbumFragment</string>
+    <string name="tag_photo_fragment">PhotoFragment</string>
 
     <!-- Transition Name TAGs -->
     <string name="transition_image_swallow_and_panda">TransitionImageSwallowAndPanda</string>

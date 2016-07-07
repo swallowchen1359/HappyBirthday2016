@@ -4,7 +4,7 @@
     <color name="Primary">#FFFFCC</color>
     <color name="PrimaryDark">#FF000000</color>
     <!-- Main  -->
-    <color name="MainBackground">#FFFFCC</color>
+    <color name="MainBackground">#E8EAEC</color>
     <!-- CrossView -->
     <color name="cross_color">#FFFFFFFF</color>
     <color name="circle_image_color_yellow">#FFFECE55</color>

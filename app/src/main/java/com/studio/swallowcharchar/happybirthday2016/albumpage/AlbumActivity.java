@@ -3,7 +3,9 @@ package com.studio.swallowcharchar.happybirthday2016.albumpage;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.controller.AlbumFragment;
@@ -28,5 +30,17 @@ public class AlbumActivity extends Activity {
 
         fragmentTransaction.add(VIEW_CONTAINER_RES_ID, albumFragment, fragmentTag);
         fragmentTransaction.commit();
+    }
+
+    public void goActivity(Class activityClass/*, View view*/) {
+        Intent intent = new Intent(this, activityClass);
+/*
+        View sharedView = view;
+        TODO: The code is used to transfer the shared image
+        String sharedString = getResources().getString(STRING_TRANSITION_IMAGE_SWALLOW_AND_PANDA_RES_ID);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, sharedView, sharedString);
+        startActivity(intent, options.toBundle());
+*/
+        startActivity(intent);
     }
 }

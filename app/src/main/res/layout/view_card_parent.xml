@@ -9,16 +9,24 @@
         android:id="@+id/album_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/album_card_title_height"
+        android:layout_marginStart="@dimen/album_card_text_margin"
         android:text="test_str"
-        android:textSize="10pt"
+        android:textSize="7pt"
         android:maxLines="1"/>
-    <ImageView
-        android:id="@+id/album_image"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/album_card_picture_height" />
+        android:layout_height="wrap_content"
+        android:padding="2dp">
+        <ImageView
+            android:id="@+id/album_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/album_card_picture_height"
+            android:scaleType="centerCrop"/>
+    </FrameLayout>
     <TextView
         android:id="@+id/album_description"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/album_card_description_height" />
+        android:layout_height="@dimen/album_card_description_height"
+        android:layout_marginStart="@dimen/album_card_text_margin"/>
 
 </LinearLayout>
