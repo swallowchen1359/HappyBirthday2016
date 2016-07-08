@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="@dimen/fragment_horizontal_margin"
+    android:paddingRight="@dimen/fragment_horizontal_margin"
     tools:context="com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoFragment">
 
     <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView
@@ -16,20 +18,117 @@
             android:orientation="vertical">
 
             <!-- Two children for parent, one is the PhotoIntro -->
-            <LinearLayout
+            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoIntro
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/photo_intro_height"
-                android:background="#ffffff99">
+                android:orientation="horizontal">
 
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="7"
+                        android:src="@mipmap/dsc_0867"
+                        android:scaleType="fitCenter"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/rect_round_corner"
+                        android:text="編輯相簿"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:paddingStart="8dp"
+                        android:text="第135次出遊"
+                        android:textSize="8pt"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="9pt"
+                            android:textStyle="bold"
+                            android:text="Date"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="6pt"
+                            android:text="2016/07/08"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="9pt"
+                            android:textStyle="bold"
+                            android:text="Photos"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="6pt"
+                            android:text="37"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="9pt"
+                            android:textStyle="bold"
+                            android:text="Place"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="6pt"
+                            android:text="心之芳庭"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoIntro>
 
             <!-- One is the PhotoGallery -->
-            <LinearLayout
+            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
+                android:numColumns="3"
                 android:background="#ff99ff99">
 
-            </LinearLayout>
+            </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery>
 
         </LinearLayout>
 
