@@ -4,9 +4,12 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import com.studio.swallowcharchar.happybirthday2016.R;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -61,6 +64,11 @@ public class AlbumView extends RecyclerView {
 
     public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
+        /**
+         * VIEW_CARD_RES_ID will be inflated, which root is ViewCardView
+         * */
+        private static final int VIEW_CARD_RES_ID = R.layout.view_album_card;
+
         private LinkedList<HashMap> mLinkedList;
 
         public class AlbumViewHolder extends RecyclerView.ViewHolder {
@@ -82,7 +90,7 @@ public class AlbumView extends RecyclerView {
         @Override
         public AlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             /** Create a CardView, belongs to parent*/
-            AlbumCardView v = new AlbumCardView(parent.getContext());
+            AlbumCardView v = (AlbumCardView) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_CARD_RES_ID, null, true);
             /** CardView size is specified in xml */
             RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(0, 10, 0, 10);

@@ -9,10 +9,14 @@ import android.widget.ScrollView;
  */
 public class PhotoView extends ScrollView {
     public PhotoView(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public PhotoView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
+    }
+
+    public PhotoView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 }

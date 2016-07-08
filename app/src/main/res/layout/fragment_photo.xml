@@ -5,21 +5,25 @@
     tools:context="com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoFragment">
 
     <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView
+        android:id="@+id/photo_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- The only child for PhotoView -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Two children for parent, one is the PhotoIntro -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/photo_intro_height"
                 android:background="#ffffff99">
 
             </LinearLayout>
 
+            <!-- One is the PhotoGallery -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="600dp"
