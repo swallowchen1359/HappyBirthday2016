@@ -49,10 +49,10 @@ public class AlbumActivity extends Activity {
 
         View sharedView = view;
         /** TODO: The code is used to transfer the shared image */
-        String sharedString = getResources().getString(STRING_TRANSITION_ALBUM_AND_PHOTO);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, sharedView, sharedString);
-        startActivity(intent, options.toBundle());
+//        String sharedString = getResources().getString(STRING_TRANSITION_ALBUM_AND_PHOTO);
+//        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this, sharedView, sharedString);
+//        startActivity(intent, options.toBundle());
 
-//        startActivity(intent);
+        startActivity(intent);
     }
 }

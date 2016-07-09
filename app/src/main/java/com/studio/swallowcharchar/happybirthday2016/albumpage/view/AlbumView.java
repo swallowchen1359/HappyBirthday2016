@@ -117,10 +117,6 @@ public class AlbumView extends RecyclerView {
         private static final int VIEW_CARD_RES_ID = R.layout.view_album_card;
 
         private LinkedList<HashMap> mLinkedList;
-        /**
-         * mAlbumBitmapLinkedList is used to cache loaded bitmap, avoiding reloading and spend time
-         * */
-        private HashMap<Integer, Bitmap> mAlbumBitmapHashMap;
 
         public class AlbumViewHolder extends RecyclerView.ViewHolder {
             public AlbumCardView mAlbumCardView;
@@ -132,7 +128,6 @@ public class AlbumView extends RecyclerView {
 
         public AlbumAdapter(LinkedList<HashMap> ll) {
             mLinkedList = ll;
-            mAlbumBitmapHashMap = new HashMap<>();
         }
 
         /**

@@ -23,6 +23,7 @@ public class PhotoView extends ScrollView {
     private static final int VIEW_INTRO_RES_ID = R.id.photo_intro;
     private static final int VIEW_GALLERY_RES_ID = R.id.photo_gallery;
 
+    private PhotoIntro mPhotoItro;
     private PhotoGallery mPhotoGallery;
     public PhotoView(Context context) {
         this(context, null);
@@ -35,6 +36,13 @@ public class PhotoView extends ScrollView {
     public PhotoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
+    }
+
+    public void setCover(int resId) {
+        if (mPhotoItro == null) {
+            mPhotoItro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
+        }
+        mPhotoItro.setCoverImage(resId);
     }
 
     public void setPhotos(LinkedList<Integer> resIds) {

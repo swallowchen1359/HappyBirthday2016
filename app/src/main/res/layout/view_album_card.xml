@@ -12,25 +12,26 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/album_card_height">
 
-        <TextView
-            android:id="@+id/album_title"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/album_card_title_height"
-            android:paddingStart="@dimen/album_card_text_padding"
-            android:gravity="center_vertical"
-            android:text="test_str"
-            android:textSize="7.5pt"
-            android:maxLines="1"/>
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="15dp">
+            <TextView
+                android:id="@+id/album_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/album_card_title_height"
+                android:gravity="center_vertical"
+                android:text="test_str"
+                android:textSize="7.5pt"
+                android:maxLines="1"/>
+
             <ImageView
                 android:id="@+id/album_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_card_picture_height"
                 android:scaleType="centerCrop"/>
-        </FrameLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

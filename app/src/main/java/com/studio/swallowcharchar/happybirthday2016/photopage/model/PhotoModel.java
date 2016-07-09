@@ -64,6 +64,15 @@ public class PhotoModel {
         }
         return mPhotoPictureList;
     }
+
+    public int getPhotoCoverId(int position) {
+        if (mContext == null || mPhotoArrayList == null || mAlbumArrayList == null) {
+            return 0;
+        }
+        Album album = mAlbumArrayList.get(position);
+        String albumResName = album.getAlbumResName();
+        return mContext.getResources().getIdentifier(albumResName, "mipmap", mContext.getPackageName());
+    }
     public boolean initModel() {
         mAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
         mPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);

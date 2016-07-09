@@ -38,6 +38,7 @@ public class PhotoFragment extends Fragment {
         /** find PhotoView */
         mPhotoView = (PhotoView) mainView.findViewById(VIEW_ALBUM_RES_ID);
         if (mModel != null && mPhotoView != null) {
+            mPhotoView.setCover(mModel.getPhotoCoverId(albumOnClickPosition));
             /** PhotoView.setPhotos(PhotoPictures) */
             mPhotoView.postDelayed(new Runnable() {
                 @Override
