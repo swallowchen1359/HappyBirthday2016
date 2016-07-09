@@ -49,4 +49,9 @@ public class PhotoActivity extends Activity {
         fragmentTransaction.add(VIEW_CONTAINER_RES_ID, photoFragment, fragmentTag);
         fragmentTransaction.commit();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

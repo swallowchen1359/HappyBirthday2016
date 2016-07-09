@@ -1,6 +1,9 @@
 package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -127,6 +130,51 @@ import java.util.LinkedList;
 
 public class PhotoGallery extends ViewGroup {
 
+    private class AddImageAsyncTask extends AsyncTask<Integer, Void, LinkedList<Bitmap>> {
+
+        private Resources mResources;
+
+        public AddImageAsyncTask(Resources res) {
+            mResources = res;
+        }
+
+        @Override
+        protected LinkedList<Bitmap> doInBackground(Integer... params) {
+            LinkedList<Bitmap> bitmapLinkedList = new LinkedList<>();
+            for (int i = 0; i < params.length; i++) {
+                int resId = params[i];
+                Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(mResources, resId, 330, 330);
+                bitmapLinkedList.add(bitmap);
+            }
+            return bitmapLinkedList;
+        }
+
+        @Override
+        protected void onPostExecute(LinkedList<Bitmap> bitmapLinkedList) {
+//            super.onPostExecute(imageView);
+            for (int i = 0; i < bitmapLinkedList.size(); i++) {
+                ImageView imageView = new ImageView(getContext());
+                imageView.setImageBitmap(bitmapLinkedList.get(i));
+                PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(330, 330);
+                layoutParams.setMargins(5,5,5,5);
+                imageView.setLayoutParams(layoutParams);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                addView(imageView);
+            }
+        }
+    }
+
+    public static class LayoutParams extends ViewGroup.MarginLayoutParams {
+
+        public LayoutParams(Context c, AttributeSet attrs) {
+            super(c, attrs);
+        }
+
+        public LayoutParams(int width, int height) {
+            super(width, height);
+        }
+    }
+
     public PhotoGallery(Context context) {
         this(context, null);
     }
@@ -139,13 +187,7 @@ public class PhotoGallery extends ViewGroup {
         if (resIds == null) {
             return;
         }
-        for (int i = 0; i < resIds.size(); i++) {
-            ImageView imageView = new ImageView(getContext());
-            imageView.setImageBitmap(ImageUtility.decodeSampledBitmapFromResource(getResources(), resIds.get(i), 340, 340));
-            imageView.setLayoutParams(new ViewGroup.LayoutParams(340, 340));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            addView(imageView);
-        }
+        new AddImageAsyncTask(getResources()).execute(resIds.toArray(new Integer[resIds.size()]));
     }
 
     @Override
@@ -155,17 +197,20 @@ public class PhotoGallery extends ViewGroup {
         int height = View.MeasureSpec.getSize(heightMeasureSpec);
         int childCount = getChildCount();
         int childWidth = 0, childHeight = 0;
+        int childMarginTop = 0, childMarginBot = 0;
         if (childCount > 0) {
             if (getChildAt(0) != null) {
                 childWidth = getChildAt(0).getMeasuredWidth();
                 childHeight = getChildAt(0).getMeasuredHeight();
+                childMarginTop = ((LayoutParams) getChildAt(0).getLayoutParams()).topMargin;
+                childMarginBot = ((LayoutParams) getChildAt(0).getLayoutParams()).bottomMargin;
             }
         }
         int rowNumber = childCount / 3;
         if (childCount % 3 != 0 && childCount != 0) {
             rowNumber += 1;
         }
-        int measuredHeight = childHeight * rowNumber;
+        int measuredHeight = (childHeight + childMarginBot + childMarginTop) * rowNumber;
         int measuredWidthSpec = View.MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
         int measuredHeightSpec = View.MeasureSpec.makeMeasureSpec(measuredHeight, MeasureSpec.EXACTLY);
         setMeasuredDimension(measuredWidthSpec, measuredHeightSpec);
@@ -181,24 +226,27 @@ public class PhotoGallery extends ViewGroup {
         /** But args are based on the screen, relative to the left corner of screen */
         int painterY = 0;
 
-        String TAG = getClass().getSimpleName();
-
-        Log.d(TAG, "(parentWidth) (" +parentWidth+")");
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
+            PhotoGallery.LayoutParams margins = (PhotoGallery.LayoutParams) childView.getLayoutParams();
             /** Get width and height of child and re-align */
             int width = childView.getMeasuredWidth();
             int height = childView.getMeasuredHeight();
             /** Parent, i.e., ViewGroup, is not big enough to put the child, put to the next row */
-            if (painterX + width > parentWidth) {
+            if (painterX + width + margins.leftMargin + margins.rightMargin > parentWidth) {
                 painterX = left;
-                painterY += height;
+                painterY += height + margins.topMargin + margins.bottomMargin;
             }
             /** re-align and re-draw child view */
-            childView.layout(painterX, painterY, painterX + width, painterY + height);
+            childView.layout(painterX + margins.leftMargin, painterY + margins.topMargin, painterX + margins.leftMargin + width, painterY + margins.topMargin + height);
             /** refresh painterX, while painterY is refreshed during re-align judgement */
-            painterX += width;
+            painterX += width + margins.leftMargin + margins.rightMargin;
         }
+    }
+
+    @Override
+    public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new PhotoGallery.LayoutParams(getContext(), attrs);
     }
 }

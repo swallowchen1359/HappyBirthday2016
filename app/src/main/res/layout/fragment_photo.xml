@@ -29,13 +29,18 @@
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:orientation="vertical">
-                    <ImageView
-                        android:transitionName="@string/transition_image_album_and_photo"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="7"
-                        android:src="@mipmap/dsc_0867"
-                        android:scaleType="fitCenter"/>
+                        android:gravity="center">
+                        <ImageView
+                            android:transitionName="@string/transition_image_album_and_photo"
+                            android:layout_width="@dimen/photo_intro_cover_width"
+                            android:layout_height="@dimen/photo_intro_cover_width"
+                            android:src="@mipmap/dsc_0867"
+                            android:scaleType="centerCrop"/>
+                    </LinearLayout>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -64,7 +69,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -84,7 +90,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -104,7 +111,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="match_parent"

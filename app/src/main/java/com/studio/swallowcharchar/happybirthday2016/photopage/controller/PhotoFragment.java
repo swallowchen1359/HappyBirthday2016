@@ -34,12 +34,17 @@ public class PhotoFragment extends Fragment {
         /** Inflate the layout for this fragment */
         View mainView = inflater.inflate(VIEW_RES_ID, container, false);
         String bundleStr = getResources().getString(STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID);
-        int albumOnClickPosition = getArguments().getInt(bundleStr, 0);
+        final int albumOnClickPosition = getArguments().getInt(bundleStr, 0);
         /** find PhotoView */
         mPhotoView = (PhotoView) mainView.findViewById(VIEW_ALBUM_RES_ID);
         if (mModel != null && mPhotoView != null) {
             /** PhotoView.setPhotos(PhotoPictures) */
-            mPhotoView.setPhotos(mModel.getPhotoPictureList(albumOnClickPosition));
+            mPhotoView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mPhotoView.setPhotos(mModel.getPhotoPictureList(albumOnClickPosition));
+                }
+            }, 600);
         } else {
             Log.d("PhotoFragment", "Model or View is null");
         }
@@ -52,5 +57,4 @@ public class PhotoFragment extends Fragment {
         mModel = new PhotoModel(activity);
         mModel.initModel();
     }
-
 }

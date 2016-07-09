@@ -60,21 +60,22 @@ public class AlbumCardView extends CardView {
     /**
      * set Album Image with resId
      */
-    public Bitmap setAlbumImage(int resId) {
+    public void setAlbumImage(int resId) {
         if (mImageView == null) {
             mImageView = (ImageView) findViewById(VIEW_IMAGE_RES_ID);
         }
-        Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 1080, 607);
+        Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 900, 900);
         mImageView.setImageBitmap(bitmap);
-        return bitmap;
 /*
         mImageView.setImageResource(resId);
 */
     }
 
-    public Bitmap setAlbumImage(Bitmap bitmap) {
+    public void setAlbumImage(Bitmap bitmap) {
+        if (mImageView == null) {
+            mImageView = (ImageView) findViewById(VIEW_IMAGE_RES_ID);
+        }
         mImageView.setImageBitmap(bitmap);
-        return bitmap;
     }
 
     /**

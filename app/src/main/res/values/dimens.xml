@@ -7,15 +7,18 @@
     <dimen name="cross_size">35dp</dimen>
 
     <!-- AlbumCardView Dimension -->
-    <dimen name="album_card_height">370dp</dimen>
-    <dimen name="album_card_picture_height">220dp</dimen>
+    <dimen name="album_card_height">510dp</dimen>
+    <dimen name="album_card_picture_height">330dp</dimen>
     <dimen name="album_card_title_height">30dp</dimen>
-    <dimen name="album_card_description_height">120dp</dimen>
+    <dimen name="album_card_function_height">30dp</dimen>
+    <dimen name="album_card_description_height">90dp</dimen>
     <dimen name="album_card_radius">7dp</dimen>
     <dimen name="album_card_text_padding">8dp</dimen>
     <dimen name="album_card_margin">3dp</dimen>
 
     <!-- PhotoView Dimension-->
     <dimen name="photo_intro_height">240dp</dimen>
+    <dimen name="photo_intro_cover_width">140dp</dimen>
+    <dimen name="photo_intro_cover_height">140dp</dimen>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -10,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -65,6 +66,49 @@ public class AlbumView extends RecyclerView {
         mOnCardClickListener = listener;
     }
 
+    public class AddImageSyncTask extends AsyncTask<AlbumAdapter.AlbumViewHolder, Void, Bitmap> {
+
+        private AlbumAdapter.AlbumViewHolder mViewHolder;
+        private Resources mResources;
+        /** LinkedList of HashMap, containing the information of CardView */
+        private LinkedList<HashMap> mAsyncLinkedList;
+        private int mIndex;
+
+        public AddImageSyncTask(Resources res, LinkedList<HashMap> linkedList, int index) {
+            mResources = res;
+            mAsyncLinkedList = linkedList;
+            mIndex = index;
+        }
+
+        @Override
+        protected Bitmap doInBackground(AlbumAdapter.AlbumViewHolder... params) {
+            mViewHolder = params[0];
+            int resId = (int) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_IMG_RES_ID);
+            return ImageUtility.decodeSampledBitmapFromResource(mResources, resId, 900, 900);
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            mViewHolder.mAlbumCardView.setAlbumDescription((String) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_DESCRIPTION));
+            mViewHolder.mAlbumCardView.setAlbumTitle((String) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_TITLE));
+            mViewHolder.mAlbumCardView.setAlbumImage(bitmap);
+
+            if (mOnCardClickListener != null) {
+                final int index = mIndex;
+                /**
+                 * shared ImageView for transition
+                 * */
+                final ImageView sharedImageView = mViewHolder.mAlbumCardView.getAlbumImage();
+                mViewHolder.mAlbumCardView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnCardClickListener.onCardClick(index, sharedImageView);
+                    }
+                });
+            }
+        }
+    }
+
     public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder> {
 
         /**
@@ -109,34 +153,7 @@ public class AlbumView extends RecyclerView {
 
         @Override
         public void onBindViewHolder(AlbumViewHolder holder, int position) {
-            Bitmap bitmap;
-            holder.mAlbumCardView.setAlbumDescription((String) mLinkedList.get(position).get(AlbumCardView.KEY_DESCRIPTION));
-            holder.mAlbumCardView.setAlbumTitle((String) mLinkedList.get(position).get(AlbumCardView.KEY_TITLE));
-            /**
-             * Set AlbumCardView's image.
-             * If set before, using cache (Do not resample again)
-             * Else, setAlbumImage with resId (Do resample)
-             * */
-            if (mAlbumBitmapHashMap != null) {
-                if ((bitmap = mAlbumBitmapHashMap.get(position)) != null) {
-                    holder.mAlbumCardView.setAlbumImage(bitmap);
-                } else {
-                    mAlbumBitmapHashMap.put(position, holder.mAlbumCardView.setAlbumImage((int) mLinkedList.get(position).get(AlbumCardView.KEY_IMG_RES_ID)));
-                }
-            }
-            if (mOnCardClickListener != null) {
-                final int index = position;
-                /**
-                 * shared ImageView for transition
-                 * */
-                final ImageView sharedImageView = holder.mAlbumCardView.getAlbumImage();
-                holder.mAlbumCardView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mOnCardClickListener.onCardClick(index, sharedImageView);
-                    }
-                });
-            }
+            new AddImageSyncTask(getResources(), mLinkedList, position).execute(holder);
         }
 
         @Override

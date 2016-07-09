@@ -41,7 +41,12 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
             /**
              * AlbumView.setAlbums(AlbumPictures, Titles, Descriptions)
              * */
-            mAlbumView.setAlbums(mModel.getAlbumPictureList(), mModel.getAlbumTitleList(), mModel.getAlbumDescriptionList());
+            mAlbumView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mAlbumView.setAlbums(mModel.getAlbumPictureList(), mModel.getAlbumTitleList(), mModel.getAlbumDescriptionList());
+                }
+            }, 1000);
             mAlbumView.setOnCardClickListener(this);
         } else {
             Log.d("AlbumFragment", "Model or View is null");
