@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.AlbumActivity;
@@ -57,7 +58,7 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
     }
 
     @Override
-    public void onCardClick(int index) {
-        ((AlbumActivity) getActivity()).goActivity(PhotoActivity.class);
+    public void onCardClick(int position, ImageView sharedImageView) {
+        ((AlbumActivity) getActivity()).goActivity(PhotoActivity.class, sharedImageView, position);
     }
 }

@@ -11,13 +11,13 @@ public class Album {
     private String albumResName;
     private String title;
     private String description;
-    private String[] albumImgResName;
+    private int[] photoResIds;
 
-    public Album(String albumResName, String title, String description, String[] albumImgResName) {
+    public Album(String albumResName, String title, String description, int[] albumImgResIds) {
         this.albumResName = albumResName;
         this.title = title;
         this.description = description;
-        this.albumImgResName = albumImgResName;
+        this.photoResIds = albumImgResIds;
     }
 
     public void setAlbumResName(String albumResName) {
@@ -32,8 +32,8 @@ public class Album {
         this.description = description;
     }
 
-    public void setAlbumImgResName(String[] albumImgResName) {
-        this.albumImgResName = albumImgResName;
+    public void setPhotoResIds(int[] albumImgResIds) {
+        this.photoResIds = albumImgResIds;
     }
 
     public String getAlbumResName() {
@@ -48,7 +48,7 @@ public class Album {
         return description;
     }
 
-    public String[] getAlbumImgResName() {
-        return albumImgResName;
+    public int[] getPhotoResIds() {
+        return photoResIds;
     }
 }

@@ -18,18 +18,24 @@ import java.util.Arrays;
  */
 public class Database {
     public static final int JSON_ALBUM = 0x1;
+    public static final int JSON_PHOTO = 0x2;
 
-    private static final int RAW_ALBUM_JSON_RES_ID = R.raw.database_album;
+    private static final int RAW_JSON_RES_ID_s[] = {
+        0,
+        R.raw.database_album,
+        /** Album and Photo will read the same json file */
+        R.raw.database_photo
+    };
 
-    private ArrayList<Album> mAlbumArrayList;
     public Database() {
     }
 
     public ArrayList loadJson(Context context, int index) {
         switch (index) {
             case JSON_ALBUM:
-                mAlbumArrayList = load(Album[].class, context.getResources().openRawResource(RAW_ALBUM_JSON_RES_ID));
-                return mAlbumArrayList;
+                return load(Album[].class, context.getResources().openRawResource(RAW_JSON_RES_ID_s[index]));
+            case JSON_PHOTO:
+                return load(Photo[].class, context.getResources().openRawResource(RAW_JSON_RES_ID_s[index]));
             default:
                 return null;
         }

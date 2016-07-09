@@ -19,6 +19,7 @@
 
             <!-- Two children for parent, one is the PhotoIntro -->
             <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoIntro
+                android:id="@+id/photo_intro"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/photo_intro_height"
                 android:orientation="horizontal">
@@ -29,6 +30,7 @@
                     android:layout_weight="5"
                     android:orientation="vertical">
                     <ImageView
+                        android:transitionName="@string/transition_image_album_and_photo"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="7"
@@ -123,10 +125,9 @@
 
             <!-- One is the PhotoGallery -->
             <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                android:id="@+id/photo_gallery"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
-                android:numColumns="3"
-                android:background="#ff99ff99">
+                android:layout_height="wrap_content">
 
             </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery>
 

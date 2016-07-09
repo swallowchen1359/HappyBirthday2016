@@ -1,16 +1,19 @@
 package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -20,7 +23,7 @@ import java.util.LinkedList;
 public class AlbumView extends RecyclerView {
 
     public interface OnCardClickListener {
-        void onCardClick(int index);
+        void onCardClick(int index, ImageView sharedImageView);
     }
 
     private AlbumAdapter mAlbumAdapter;
@@ -70,6 +73,10 @@ public class AlbumView extends RecyclerView {
         private static final int VIEW_CARD_RES_ID = R.layout.view_album_card;
 
         private LinkedList<HashMap> mLinkedList;
+        /**
+         * mAlbumBitmapLinkedList is used to cache loaded bitmap, avoiding reloading and spend time
+         * */
+        private HashMap<Integer, Bitmap> mAlbumBitmapHashMap;
 
         public class AlbumViewHolder extends RecyclerView.ViewHolder {
             public AlbumCardView mAlbumCardView;
@@ -81,6 +88,7 @@ public class AlbumView extends RecyclerView {
 
         public AlbumAdapter(LinkedList<HashMap> ll) {
             mLinkedList = ll;
+            mAlbumBitmapHashMap = new HashMap<>();
         }
 
         /**
@@ -101,15 +109,31 @@ public class AlbumView extends RecyclerView {
 
         @Override
         public void onBindViewHolder(AlbumViewHolder holder, int position) {
+            Bitmap bitmap;
             holder.mAlbumCardView.setAlbumDescription((String) mLinkedList.get(position).get(AlbumCardView.KEY_DESCRIPTION));
             holder.mAlbumCardView.setAlbumTitle((String) mLinkedList.get(position).get(AlbumCardView.KEY_TITLE));
-            holder.mAlbumCardView.setAlbumImage((int) mLinkedList.get(position).get(AlbumCardView.KEY_IMG_RES_ID));
+            /**
+             * Set AlbumCardView's image.
+             * If set before, using cache (Do not resample again)
+             * Else, setAlbumImage with resId (Do resample)
+             * */
+            if (mAlbumBitmapHashMap != null) {
+                if ((bitmap = mAlbumBitmapHashMap.get(position)) != null) {
+                    holder.mAlbumCardView.setAlbumImage(bitmap);
+                } else {
+                    mAlbumBitmapHashMap.put(position, holder.mAlbumCardView.setAlbumImage((int) mLinkedList.get(position).get(AlbumCardView.KEY_IMG_RES_ID)));
+                }
+            }
             if (mOnCardClickListener != null) {
                 final int index = position;
+                /**
+                 * shared ImageView for transition
+                 * */
+                final ImageView sharedImageView = holder.mAlbumCardView.getAlbumImage();
                 holder.mAlbumCardView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnCardClickListener.onCardClick(index);
+                        mOnCardClickListener.onCardClick(index, sharedImageView);
                     }
                 });
             }

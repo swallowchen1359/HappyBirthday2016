@@ -74,7 +74,7 @@ public class ImageUtility {
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
-        Log.d("ImageUtility", "inSampleSize " +options.inSampleSize+ "(" +reqWidth+ ", " +reqHeight+ ")");
+//        Log.d("ImageUtility", "inSampleSize " +options.inSampleSize+ "(" +reqWidth+ ", " +reqHeight+ ")");
 
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;

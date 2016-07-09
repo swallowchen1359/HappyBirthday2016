@@ -1,6 +1,7 @@
 package com.studio.swallowcharchar.happybirthday2016.albumpage.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.support.v7.widget.CardView;
 import android.widget.FrameLayout;
@@ -56,20 +57,24 @@ public class AlbumCardView extends CardView {
         setRadius(mCardViewRadius);
     }
 
-
-
     /**
      * set Album Image with resId
      */
-    public void setAlbumImage(int resId) {
-        /** TODO: remember to use ImageUtility to resize the photo */
+    public Bitmap setAlbumImage(int resId) {
         if (mImageView == null) {
             mImageView = (ImageView) findViewById(VIEW_IMAGE_RES_ID);
         }
-        mImageView.setImageBitmap(ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 1080, 607));
+        Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 1080, 607);
+        mImageView.setImageBitmap(bitmap);
+        return bitmap;
 /*
         mImageView.setImageResource(resId);
 */
+    }
+
+    public Bitmap setAlbumImage(Bitmap bitmap) {
+        mImageView.setImageBitmap(bitmap);
+        return bitmap;
     }
 
     /**
@@ -92,5 +97,17 @@ public class AlbumCardView extends CardView {
             mDescriptionTextView = (TextView) findViewById(VIEW_DESCRIPTION_RES_ID);
         }
         mDescriptionTextView.setText(string);
+    }
+
+    public ImageView getAlbumImage() {
+        return mImageView;
+    }
+
+    public TextView getAlbumTitle() {
+        return mTitleTextView;
+    }
+
+    public TextView getAlbumDescription() {
+        return mDescriptionTextView;
     }
 }

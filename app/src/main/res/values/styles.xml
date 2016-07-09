@@ -22,10 +22,4 @@
             @transition/change_image_transform</item>
     </style>
 
-    <!-- Styleable for CrossView -->
-    <declare-styleable name="CrossView">
-        <attr name="setCrossColor" format="color"/>
-        <attr name="setCrossSize" format="dimension"/>
-    </declare-styleable>
-
 </resources>
