@@ -2,6 +2,7 @@
 <com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:swallow="http://schemas.android.com/apk/res-auto"
     android:id="@+id/album_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,14 +19,15 @@
             android:orientation="vertical"
             android:padding="15dp">
             <!-- AlbumCardView title -->
-            <TextView
+            <com.studio.swallowcharchar.happybirthday2016.widget.SwallowTextView
                 android:id="@+id/album_title"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_card_title_height"
                 android:gravity="center_vertical"
                 android:text="test_str"
-                android:textSize="7.5pt"
-                android:maxLines="1"/>
+                android:textSize="9pt"
+                android:maxLines="1"
+                swallow:ttf_name="fonts/SentyTEA.ttf"/>
             <!-- AlbumCardView image -->
             <ImageView
                 android:id="@+id/album_image"
