@@ -19,12 +19,13 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 /**
- * Created by Swallow on 6/30/16.
+ * AlbumView contains lots of AlbumCardView, see {@link AlbumCardView}, by using AlbumAdapter
+ * , see {@link AlbumAdapter}
  */
 public class AlbumView extends RecyclerView {
 
     public interface OnCardClickListener {
-        void onCardClick(int index, ImageView sharedImageView);
+        void onCardImageClick(int index, ImageView sharedImageView);
     }
 
     private AlbumAdapter mAlbumAdapter;
@@ -99,10 +100,10 @@ public class AlbumView extends RecyclerView {
                  * shared ImageView for transition
                  * */
                 final ImageView sharedImageView = mViewHolder.mAlbumCardView.getAlbumImage();
-                mViewHolder.mAlbumCardView.setOnClickListener(new OnClickListener() {
+                mViewHolder.mAlbumCardView.getAlbumImage().setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnCardClickListener.onCardClick(index, sharedImageView);
+                        mOnCardClickListener.onCardImageClick(index, sharedImageView);
                     }
                 });
             }

@@ -58,7 +58,7 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
     }
 
     @Override
-    public void onCardClick(int position, ImageView sharedImageView) {
+    public void onCardImageClick(int position, ImageView sharedImageView) {
         ((AlbumActivity) getActivity()).goActivity(PhotoActivity.class, sharedImageView, position);
     }
 }

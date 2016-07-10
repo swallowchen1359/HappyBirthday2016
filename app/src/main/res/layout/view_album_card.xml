@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="15dp">
+            <!-- AlbumCardView title -->
             <TextView
                 android:id="@+id/album_title"
                 android:layout_width="match_parent"
@@ -25,7 +26,7 @@
                 android:text="test_str"
                 android:textSize="7.5pt"
                 android:maxLines="1"/>
-
+            <!-- AlbumCardView image -->
             <ImageView
                 android:id="@+id/album_image"
                 android:layout_width="match_parent"
@@ -33,6 +34,7 @@
                 android:scaleType="centerCrop"/>
         </LinearLayout>
 
+        <!-- AlbumCardView function -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/album_card_function_height"
@@ -42,17 +44,56 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="horizontal"
                 android:background="@drawable/rect_top_border">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_place_black_24dp"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Taichung"
+                    android:layout_marginRight="5dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_schedule_black_24dp"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="2016/07/08"
+                    android:layout_marginRight="5dp"/>
+                
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_create_black_24dp"
+                    android:layout_marginRight="5dp"/>
             </LinearLayout>
 
         </LinearLayout>
 
+        <!-- AlbumCardView description -->
         <TextView
             android:id="@+id/album_description"
             android:layout_width="match_parent"
             android:layout_height="@dimen/album_card_description_height"
             android:paddingLeft="@dimen/album_card_text_padding"
-            android:paddingRight="@dimen/album_card_text_padding"/>
+            android:paddingRight="@dimen/album_card_text_padding"
+            android:paddingTop="@dimen/album_card_text_padding"
+            android:maxLines="4"/>
 
     </LinearLayout>
 </com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumCardView>
