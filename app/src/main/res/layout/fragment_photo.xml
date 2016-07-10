@@ -46,21 +46,28 @@
                             android:src="@mipmap/dsc_0867"
                             android:scaleType="centerCrop"/>
                     </LinearLayout>
-                    <Button
-                        android:layout_width="@dimen/photo_intro_cover_width"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/rect_round_corner"
-                        android:text="編輯相簿"
-                        />
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
+                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:paddingStart="8dp"
-                        android:text="第135次出遊"
-                        android:textSize="8pt"/>
+                        android:paddingLeft="20dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_create_black_24dp"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="編輯相簿"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"/>
                 </LinearLayout>
 
                 <!-- Right Intro -->
@@ -83,6 +90,7 @@
                             android:textSize="9pt"
                             android:textStyle="bold"
                             android:text="Date"/>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -103,6 +111,7 @@
                             android:textSize="9pt"
                             android:textStyle="bold"
                             android:text="Photos"/>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -123,6 +132,7 @@
                             android:textSize="9pt"
                             android:textStyle="bold"
                             android:text="Place"/>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
