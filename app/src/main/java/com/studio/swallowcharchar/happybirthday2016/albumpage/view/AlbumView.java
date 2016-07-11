@@ -48,7 +48,8 @@ public class AlbumView extends RecyclerView {
         setAdapter(mAlbumAdapter);
     }
 
-    public void setAlbums(LinkedList<Integer> resIds, LinkedList<String> titleStrings, LinkedList<String> descriptionStrings) {
+    public void setAlbums(LinkedList<Integer> resIds, LinkedList<String> titleStrings, LinkedList<String> descriptionStrings,
+                            LinkedList<String> places, LinkedList<LinkedList<Integer>> times, LinkedList<LinkedList<String>> tags) {
         if (resIds == null) {
             return;
         }
@@ -57,6 +58,9 @@ public class AlbumView extends RecyclerView {
             hashMap.put(AlbumCardView.KEY_IMG_RES_ID, resIds.get(i));
             hashMap.put(AlbumCardView.KEY_TITLE, titleStrings.get(i));
             hashMap.put(AlbumCardView.KEY_DESCRIPTION, descriptionStrings.get(i));
+            hashMap.put(AlbumCardView.KEY_PLACE, places.get(i));
+            hashMap.put(AlbumCardView.KEY_TIME, times.get(i));
+            hashMap.put(AlbumCardView.KEY_TAGS, tags.get(i));
             mAlbumLinkedList.add(hashMap);
         }
 
@@ -93,6 +97,9 @@ public class AlbumView extends RecyclerView {
             mViewHolder.mAlbumCardView.setAlbumDescription((String) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_DESCRIPTION));
             mViewHolder.mAlbumCardView.setAlbumTitle((String) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_TITLE));
             mViewHolder.mAlbumCardView.setAlbumImage(bitmap);
+            mViewHolder.mAlbumCardView.setAlbumPlace((String) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_PLACE));
+            mViewHolder.mAlbumCardView.setAlbumTime((LinkedList<Integer>) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_TIME));
+            mViewHolder.mAlbumCardView.setAlbumTags((LinkedList<String>) mAsyncLinkedList.get(mIndex).get(AlbumCardView.KEY_TAGS));
 
             if (mOnCardClickListener != null) {
                 final int index = mIndex;

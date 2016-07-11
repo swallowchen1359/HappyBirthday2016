@@ -34,6 +34,23 @@ public class AlbumModel {
     private LinkedList<String> mAlbumTitleList;
 
     /**
+     * mAlbumPlaceList is the list contains AlbumCard place to show
+     * */
+    private LinkedList<String> mAlbumPlaceList;
+
+    /**
+     * mAlbumTimeList is the list contains AlbumCard time to show
+     * which contains another LinkedList of Integer, individually year, month and day
+     * */
+    private LinkedList<LinkedList<Integer>> mAlbumTimeList;
+
+    /**
+     * mAlbumTagsList is the list contains AlbumCard tag to show
+     * which contains another LinkedList of String, all tags reserved
+     * */
+    private LinkedList<LinkedList<String>> mAlbumTagsList;
+
+    /**
      * mAlbumDescription is the list contains AlbumCard description.
      * TODO: Maybe we should use InputStream instead
      * */
@@ -43,6 +60,9 @@ public class AlbumModel {
         mAlbumPictureList = new LinkedList<>();
         mAlbumTitleList = new LinkedList<>();
         mAlbumDescriptionList = new LinkedList<>();
+        mAlbumPlaceList = new LinkedList<>();
+        mAlbumTimeList = new LinkedList<>();
+        mAlbumTagsList = new LinkedList<>();
     }
 
     public LinkedList<Integer> getAlbumPictureList() {
@@ -77,6 +97,46 @@ public class AlbumModel {
             mAlbumDescriptionList.add(mAlbumArrayList.get(i).getDescription());
         }
         return mAlbumDescriptionList;
+    }
+
+    public LinkedList<String> getAlbumPlaceList() {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        for (int i = 0; i < mAlbumArrayList.size(); i++) {
+            mAlbumPlaceList.add(mAlbumArrayList.get(i).getPlace());
+        }
+        return mAlbumPlaceList;
+    }
+
+    public LinkedList<LinkedList<Integer>> getAlbumTimeList() {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        for (int i = 0; i < mAlbumArrayList.size(); i++) {
+            LinkedList<Integer> timeList = new LinkedList<>();
+            int[] timeArray = mAlbumArrayList.get(i).getTime();
+            for (int j = 0; j < timeArray.length; j++) {
+                timeList.add(timeArray[j]);
+            }
+            mAlbumTimeList.add(timeList);
+        }
+        return mAlbumTimeList;
+    }
+
+    public LinkedList<LinkedList<String>> getAlbumTagsList() {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        for (int i = 0; i < mAlbumArrayList.size(); i++) {
+            LinkedList<String> tagsList = new LinkedList<>();
+            String[] tagsArray = mAlbumArrayList.get(i).getTags();
+            for (int j = 0; j < tagsArray.length; j++) {
+                tagsList.add(tagsArray[j]);
+            }
+            mAlbumTagsList.add(tagsList);
+        }
+        return mAlbumTagsList;
     }
 
     public boolean initModel() {

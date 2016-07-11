@@ -12,11 +12,16 @@ import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 
+import java.util.LinkedList;
+
 public class AlbumCardView extends CardView {
 
     private static final int VIEW_TITLE_RES_ID = R.id.album_title;
     private static final int VIEW_IMAGE_RES_ID = R.id.album_image;
     private static final int VIEW_DESCRIPTION_RES_ID = R.id.album_description;
+    private static final int VIEW_PLACE_RES_ID = R.id.album_place;
+    private static final int VIEW_TIME_RES_ID = R.id.album_time;
+    private static final int VIEW_TAGS_RES_ID = R.id.album_tags;
     private static final int DIMEN_RADIUS_RES_ID = R.dimen.album_card_radius;
     /**
      * These constant integer is used for AlbumAdapter and AlbumView to figure out which content
@@ -25,6 +30,9 @@ public class AlbumCardView extends CardView {
     public static final int KEY_IMG_RES_ID = 0x01;
     public static final int KEY_TITLE = 0x02;
     public static final int KEY_DESCRIPTION = 0x03;
+    public static final int KEY_PLACE = 0x04;
+    public static final int KEY_TIME = 0x05;
+    public static final int KEY_TAGS = 0x06;
     /**
      * AlbumCardView contains an FrameLayout, which contains an ImageView inside
      */
@@ -32,7 +40,7 @@ public class AlbumCardView extends CardView {
     /**
      * AlbumCardView contains some TextViews for description
      */
-    private TextView mTitleTextView, mDescriptionTextView;
+    private TextView mTitleTextView, mDescriptionTextView, mPlaceTextView, mTimeTextView, mTagsTextView;
 
     /**
      * Radius of AlbumCardView
@@ -53,6 +61,9 @@ public class AlbumCardView extends CardView {
         mImageView = (ImageView) findViewById(VIEW_IMAGE_RES_ID);
         mTitleTextView = (TextView) findViewById(VIEW_TITLE_RES_ID);
         mDescriptionTextView = (TextView) findViewById(VIEW_DESCRIPTION_RES_ID);
+        mPlaceTextView = (TextView) findViewById(VIEW_PLACE_RES_ID);
+        mTimeTextView = (TextView) findViewById(VIEW_TIME_RES_ID);
+        mTagsTextView = (TextView) findViewById(VIEW_TAGS_RES_ID);
         mCardViewRadius = context.getResources().getDimension(DIMEN_RADIUS_RES_ID);
         setRadius(mCardViewRadius);
     }
@@ -64,11 +75,10 @@ public class AlbumCardView extends CardView {
         if (mImageView == null) {
             mImageView = (ImageView) findViewById(VIEW_IMAGE_RES_ID);
         }
-        Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 900, 900);
+        Bitmap bitmap = ImageUtility.decodeSampledBitmapFromResource(getResources(), resId, 300, 300);
         mImageView.setImageBitmap(bitmap);
-/*
-        mImageView.setImageResource(resId);
-*/
+
+//        mImageView.setImageResource(resId);
     }
 
     public void setAlbumImage(Bitmap bitmap) {
@@ -100,6 +110,56 @@ public class AlbumCardView extends CardView {
         mDescriptionTextView.setText(string);
     }
 
+    public void setAlbumPlace(String string) {
+        if (mPlaceTextView == null) {
+            mPlaceTextView = (TextView) findViewById(VIEW_PLACE_RES_ID);
+        }
+        mPlaceTextView.setText(string);
+    }
+
+    public void setAlbumTime(LinkedList<Integer> time) {
+        if (mTimeTextView == null) {
+            mTimeTextView = (TextView) findViewById(VIEW_TIME_RES_ID);
+        }
+
+        if (time.size() != 3) {
+            mTimeTextView.setText("1991/05/17");
+            return;
+        }
+
+        int year, month, day;
+        String timeStr, yearStr, monthStr, dayStr;
+
+        year = time.get(0);
+        month = time.get(1);
+        day = time.get(2);
+
+        yearStr = String.valueOf(year);
+        if (month < 10) {
+            monthStr = "0" +String.valueOf(month);
+        } else {
+            monthStr = String.valueOf(month);
+        }
+        if (day < 10) {
+            dayStr = "0" +String.valueOf(day);
+        } else {
+            dayStr = String.valueOf(day);
+        }
+        timeStr = yearStr +"/"+ monthStr +"/"+ dayStr;
+        mTimeTextView.setText(timeStr);
+    }
+
+    public void setAlbumTags(LinkedList<String> tags) {
+        if (mTagsTextView == null) {
+            mTagsTextView = (TextView) findViewById(VIEW_TAGS_RES_ID);
+        }
+        String tagsStr = "";
+        for (int i = 0; i < tags.size(); i++) {
+            tagsStr += tags.get(i) +"  ";
+        }
+        mTagsTextView.setText(tagsStr);
+    }
+
     public ImageView getAlbumImage() {
         return mImageView;
     }
@@ -110,5 +170,17 @@ public class AlbumCardView extends CardView {
 
     public TextView getAlbumDescription() {
         return mDescriptionTextView;
+    }
+
+    public TextView getAlbumPlace() {
+        return mPlaceTextView;
+    }
+
+    public TextView getAlbumTime() {
+        return mTimeTextView;
+    }
+
+    public TextView getAlbumTags() {
+        return mTagsTextView;
     }
 }

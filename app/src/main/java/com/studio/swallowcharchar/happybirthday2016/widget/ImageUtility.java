@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * Created by Swallow on 6/24/16.
@@ -74,10 +77,30 @@ public class ImageUtility {
         // Calculate inSampleSize
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
-//        Log.d("ImageUtility", "inSampleSize " +options.inSampleSize+ "(" +reqWidth+ ", " +reqHeight+ ")");
-
         // Decode bitmap with inSampleSize set
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static int getImageRotation(Resources res, int resId) {
+        int rotation = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface("mipmap-xxhdpi/dsc_0052.JPG");
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotation = 270;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotation = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotation = 90;
+                    break;
+            }
+        } catch (IOException e) {
+
+        }
+        return rotation;
     }
 }

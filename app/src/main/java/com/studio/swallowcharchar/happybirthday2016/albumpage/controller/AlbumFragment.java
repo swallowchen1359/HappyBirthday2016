@@ -15,6 +15,7 @@ import com.studio.swallowcharchar.happybirthday2016.albumpage.AlbumActivity;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.model.AlbumModel;
 import com.studio.swallowcharchar.happybirthday2016.albumpage.view.AlbumView;
 import com.studio.swallowcharchar.happybirthday2016.photopage.PhotoActivity;
+import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,7 +42,9 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
             /**
              * AlbumView.setAlbums(AlbumPictures, Titles, Descriptions)
              * */
-            mAlbumView.setAlbums(mModel.getAlbumPictureList(), mModel.getAlbumTitleList(), mModel.getAlbumDescriptionList());
+            mAlbumView.setAlbums(mModel.getAlbumPictureList(), mModel.getAlbumTitleList(),
+                    mModel.getAlbumDescriptionList(), mModel.getAlbumPlaceList(),
+                    mModel.getAlbumTimeList(), mModel.getAlbumTagsList());
             mAlbumView.setOnCardClickListener(this);
         } else {
             Log.d("AlbumFragment", "Model or View is null");
@@ -55,6 +58,7 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
         Log.d("AlbumFragment", "onAttach");
         mModel = new AlbumModel(activity);
         mModel.initModel();
+        Log.d("AlbumFragment", "getImageRotation Test " + ImageUtility.getImageRotation(getResources(), 0));
     }
 
     @Override
