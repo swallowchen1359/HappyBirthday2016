@@ -1,14 +1,8 @@
 package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
@@ -22,9 +16,12 @@ public class PhotoView extends ScrollView {
 
     private static final int VIEW_INTRO_RES_ID = R.id.photo_intro;
     private static final int VIEW_GALLERY_RES_ID = R.id.photo_gallery;
+    private static final int VIEW_TAG_AREA_RES_ID = R.id.photo_tag_area;
 
-    private PhotoIntro mPhotoItro;
+    private PhotoIntro mPhotoIntro;
     private PhotoGallery mPhotoGallery;
+    private PhotoTagArea mPhotoTagArea;
+
     public PhotoView(Context context) {
         this(context, null);
     }
@@ -39,10 +36,17 @@ public class PhotoView extends ScrollView {
     }
 
     public void setCover(int resId) {
-        if (mPhotoItro == null) {
-            mPhotoItro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
+        if (mPhotoIntro == null) {
+            mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
         }
-        mPhotoItro.setCoverImage(resId);
+        mPhotoIntro.setCoverImage(resId);
+    }
+
+    public void setCover(Bitmap bitmap) {
+        if (mPhotoIntro == null) {
+            mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
+        }
+        mPhotoIntro.setCoverImage(bitmap);
     }
 
     public void setPhotos(LinkedList<Integer> resIds) {
@@ -50,5 +54,12 @@ public class PhotoView extends ScrollView {
             mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
         }
         mPhotoGallery.setGallery(resIds);
+    }
+
+    public void setTags(LinkedList<String> tagStrs) {
+        if (mPhotoTagArea == null) {
+            mPhotoTagArea = (PhotoTagArea) findViewById(VIEW_TAG_AREA_RES_ID);
+        }
+        mPhotoTagArea.setTags(tagStrs);
     }
 }

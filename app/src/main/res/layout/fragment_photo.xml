@@ -22,126 +22,146 @@
                 android:id="@+id/photo_intro"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/photo_intro_height"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="10dp">
 
-                <!-- Left Intro -->
+                <!-- Upper part of intro, containing Left and Right Intro -->
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:orientation="vertical"
-                    android:paddingTop="10dp"
-                    android:gravity="center_horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <!-- Left Intro -->
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="7"
-                        android:gravity="center">
-                        <ImageView
-                            android:id="@+id/photo_intro_cover"
-                            android:transitionName="@string/transition_image_album_and_photo"
-                            android:layout_width="@dimen/photo_intro_cover_width"
-                            android:layout_height="@dimen/photo_intro_cover_width"
-                            android:src="@mipmap/dsc_0867"
-                            android:scaleType="centerCrop"/>
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp"
+                        android:gravity="center_horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="10"
+                            android:gravity="center">
+                            <ImageView
+                                android:id="@+id/photo_intro_cover"
+                                android:transitionName="@string/transition_image_album_and_photo"
+                                android:layout_width="@dimen/photo_intro_cover_width"
+                                android:layout_height="@dimen/photo_intro_cover_width"
+                                android:src="@mipmap/dsc_0867"
+                                android:scaleType="centerCrop"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="2"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingLeft="20dp">
+
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <!-- Right Intro -->
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="20dp">
-                        <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@mipmap/ic_create_black_24dp"/>
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="@dimen/photo_intro_item_margin">
 
-                        <TextView
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/ic_schedule_black_36dp"
+                                android:layout_marginRight="@dimen/photo_intro_item_margin"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="6pt"
+                                android:text="2016/07/08"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="@dimen/photo_intro_item_margin">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/ic_insert_photo_black_36dp"
+                                android:layout_marginRight="@dimen/photo_intro_item_margin"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="6pt"
+                                android:text="37"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="編輯相簿"/>
-                    </LinearLayout>
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="@dimen/photo_intro_item_margin">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/ic_place_black_36dp"
+                                android:layout_marginRight="@dimen/photo_intro_item_margin"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="6pt"
+                                android:text="心之芳庭"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="@dimen/photo_intro_item_margin">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@mipmap/ic_create_black_36dp"
+                                android:layout_marginRight="@dimen/photo_intro_item_margin"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="編輯相簿"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
                 </LinearLayout>
 
-                <!-- Right Intro -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                <!-- Bottom part of intro, containing Tags for function use -->
+                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoTagArea
+                    android:id="@+id/photo_tag_area"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoTagArea>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="9pt"
-                            android:textStyle="bold"
-                            android:text="Date"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="6pt"
-                            android:text="2016/07/08"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="9pt"
-                            android:textStyle="bold"
-                            android:text="Photos"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="6pt"
-                            android:text="37"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="9pt"
-                            android:textStyle="bold"
-                            android:text="Place"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="6pt"
-                            android:text="心之芳庭"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
             </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoIntro>
 
             <!-- One is the PhotoGallery -->

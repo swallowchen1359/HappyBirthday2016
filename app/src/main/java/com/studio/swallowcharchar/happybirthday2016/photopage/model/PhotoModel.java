@@ -27,10 +27,15 @@ public class PhotoModel {
      * PhotoPictureList is used to let PhotoView and PhotoFragment to show photos
      * */
     private LinkedList<Integer> mPhotoPictureList;
+    /**
+     *
+     * */
+    private LinkedList<String> mPhotoTagList;
 
     public PhotoModel(Context context) {
         mContext = context;
         mPhotoPictureList = new LinkedList<>();
+        mPhotoTagList = new LinkedList<>();
     }
 
     /**
@@ -73,6 +78,19 @@ public class PhotoModel {
         String albumResName = album.getAlbumResName();
         return mContext.getResources().getIdentifier(albumResName, "mipmap", mContext.getPackageName());
     }
+
+    public LinkedList<String> getPhotoTagList(int position) {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        Album album = mAlbumArrayList.get(position);
+        String[] tags = album.getTags();
+        for (int i = 0; i < tags.length; i++) {
+            mPhotoTagList.add(tags[i]);
+        }
+        return mPhotoTagList;
+    }
+
     public boolean initModel() {
         mAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
         mPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);

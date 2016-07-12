@@ -3,15 +3,20 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import android.view.Gravity;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.view.View;
 
+import com.studio.swallowcharchar.happybirthday2016.R;
+
 import java.util.LinkedList;
-import java.util.String;
 
 public class PhotoTagArea extends HorizontalScrollView {
+
+    private static final int DIMEN_TAG_MARGIN_RES_ID = R.dimen.photo_intro_tag_margin;
+    private static final int VIEW_TAG_BACKGROUND_RES_ID = R.drawable.rect_round_corner;
 
     public interface OnTagClickListener {
         public void OnTagClick(String string);
@@ -34,6 +39,7 @@ public class PhotoTagArea extends HorizontalScrollView {
         mContext = context;
         mLinearLayout = new LinearLayout(mContext);
         mLinearLayout.setLayoutParams(new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.WRAP_CONTENT, HorizontalScrollView.LayoutParams.MATCH_PARENT));
+        mLinearLayout.setGravity(Gravity.CENTER_VERTICAL);
         addView(mLinearLayout);
         mTagViewList = new LinkedList<>();
     }
@@ -50,11 +56,14 @@ public class PhotoTagArea extends HorizontalScrollView {
         for (int i = 0; i < strList.size(); i++) {
             final String tagStr = strList.get(i);
             TextView textView = new TextView(mContext);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMarginStart((int) mContext.getResources().getDimension(DIMEN_TAG_MARGIN_RES_ID));
+            textView.setLayoutParams(layoutParams);
             textView.setText(tagStr);
+            textView.setBackgroundResource(VIEW_TAG_BACKGROUND_RES_ID);
             textView.setOnClickListener(new OnClickListener() {
                 @Override
-                void onClick(View v) {
+                public void onClick(View v) {
                     if (mOnTagClickListener != null) {
                         mOnTagClickListener.OnTagClick(tagStr);
                     }

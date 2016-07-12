@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -190,6 +189,9 @@ public class PhotoGallery extends ViewGroup {
         new AddImageAsyncTask(getResources()).execute(resIds.toArray(new Integer[resIds.size()]));
     }
 
+    /**
+     * TODO : Debug, if ChildView without specific size, the ChildView will disappear
+     * */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -198,14 +200,13 @@ public class PhotoGallery extends ViewGroup {
         int childCount = getChildCount();
         int childWidth = 0, childHeight = 0;
         int childMarginTop = 0, childMarginBot = 0;
-        if (childCount > 0) {
-            if (getChildAt(0) != null) {
-                childWidth = getChildAt(0).getMeasuredWidth();
-                childHeight = getChildAt(0).getMeasuredHeight();
-                childMarginTop = ((LayoutParams) getChildAt(0).getLayoutParams()).topMargin;
-                childMarginBot = ((LayoutParams) getChildAt(0).getLayoutParams()).bottomMargin;
-            }
+        if (getChildAt(0) != null) {
+            childWidth = getChildAt(0).getMeasuredWidth();
+            childHeight = getChildAt(0).getMeasuredHeight();
+            childMarginTop = ((LayoutParams) getChildAt(0).getLayoutParams()).topMargin;
+            childMarginBot = ((LayoutParams) getChildAt(0).getLayoutParams()).bottomMargin;
         }
+
         int rowNumber = childCount / 3;
         if (childCount % 3 != 0 && childCount != 0) {
             rowNumber += 1;

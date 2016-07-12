@@ -155,7 +155,7 @@ public class AlbumCardView extends CardView {
         }
         String tagsStr = "";
         for (int i = 0; i < tags.size(); i++) {
-            tagsStr += tags.get(i) +"  ";
+            tagsStr += "#" +tags.get(i)+ "  ";
         }
         mTagsTextView.setText(tagsStr);
     }

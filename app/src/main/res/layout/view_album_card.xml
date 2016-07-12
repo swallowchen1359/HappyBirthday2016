@@ -63,6 +63,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="@color/text_card_function"
+                    android:textSize="@dimen/album_card_function_text_size"
                     android:text="Taichung"
                     android:layout_marginRight="5dp"/>
 
@@ -79,6 +80,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="@color/text_card_function"
+                    android:textSize="@dimen/album_card_function_text_size"
                     android:text="2016/07/08"
                     android:layout_marginRight="5dp"/>
 
@@ -101,6 +103,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:textColor="@color/text_card_function"
+                    android:textSize="@dimen/album_card_function_text_size"
                     android:text="#Tag1  #標籤2"
                     android:layout_marginRight="5dp"/>
 
