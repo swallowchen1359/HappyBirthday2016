@@ -150,15 +150,8 @@ public class PhotoGallery extends ViewGroup {
 
         @Override
         protected void onPostExecute(LinkedList<Bitmap> bitmapLinkedList) {
-//            super.onPostExecute(imageView);
             for (int i = 0; i < bitmapLinkedList.size(); i++) {
-                ImageView imageView = new ImageView(getContext());
-                imageView.setImageBitmap(bitmapLinkedList.get(i));
-                PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(330, 330);
-                layoutParams.setMargins(5,5,5,5);
-                imageView.setLayoutParams(layoutParams);
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                addView(imageView);
+                createImageView(bitmapLinkedList.get(i));
             }
         }
     }
@@ -182,11 +175,24 @@ public class PhotoGallery extends ViewGroup {
         super(context, attrs);
     }
 
-    public void setGallery(LinkedList<Integer> resIds) {
-        if (resIds == null) {
-            return;
+    public void setGallery(LinkedList<Bitmap> bitmapLinkedList) {
+        for (int i = 0; i < bitmapLinkedList.size(); i++) {
+            createImageView(bitmapLinkedList.get(i));
         }
-        new AddImageAsyncTask(getResources()).execute(resIds.toArray(new Integer[resIds.size()]));
+    }
+
+    public void setGallery(Bitmap bitmap) {
+        createImageView(bitmap);
+    }
+
+    private void createImageView(Bitmap bitmap) {
+        ImageView imageView = new ImageView(getContext());
+        imageView.setImageBitmap(bitmap);
+        PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(330, 330);
+        layoutParams.setMargins(5,5,5,5);
+        imageView.setLayoutParams(layoutParams);
+        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        addView(imageView);
     }
 
     /**

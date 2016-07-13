@@ -1,15 +1,17 @@
 [
     {
         "albumResName"    : "dsc_0052",
+        "source"          : 0,
         "title"           : "",
         "description"     : "第一行\n第二行\n第三行",
-        "photoResIds"     : [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7],
+        "photoResIds"     : [1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7,1, 2, 3, 4, 5, 6, 7, 8],
         "place"           : "Taichung",
         "time"            : [2016, 7, 8],
         "tags"            : ["大頭貼", "標籤", "Tag", "出去玩", "Panda", "粉紅色", "在家", "Lock", "冬天"]
     },
     {
         "albumResName"    : "dsc_0156",
+        "source"          : 0,
         "title"           : "好像是南投吧",
         "description"     : "照片要想辦法改成直的或者想其他辦法試試看\n長度測試",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],
@@ -19,6 +21,7 @@
     },
     {
         "albumResName"    : "dsc_0238",
+        "source"          : 0,
         "title"           : "笨Lock",
         "description"     : "笨Lock穿衣服",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],
@@ -28,6 +31,7 @@
     },
     {
         "albumResName"    : "dsc_0867",
+        "source"          : 0,
         "title"           : "心之芳庭",
         "description"     : "長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試長度測試",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],
@@ -37,6 +41,7 @@
     },
     {
         "albumResName"    : "dsc_0872",
+        "source"          : 0,
         "title"           : "心之芳庭",
         "description"     : "",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],
@@ -46,6 +51,7 @@
     },
     {
         "albumResName"    : "dsc_0923",
+        "source"          : 0,
         "title"           : "誠品文青跨年",
         "description"     : "居然還沒看到煙火",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],
@@ -55,6 +61,7 @@
     },
     {
         "albumResName"    : "dsc_0937",
+        "source"          : 0,
         "title"           : "安霸尾牙",
         "description"     : "馬的什麼都沒有抽到",
         "photoResIds"     : [1, 2, 3, 4, 5, 6, 7],

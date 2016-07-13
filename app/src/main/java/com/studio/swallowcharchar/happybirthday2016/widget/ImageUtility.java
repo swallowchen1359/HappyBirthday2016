@@ -68,18 +68,28 @@ public class ImageUtility {
 
     public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
                                                          int reqWidth, int reqHeight) {
+        Bitmap bitmap;
+        bitmap = BitmapFactory.decodeResource(res, resId, null);
+        return resizeBitmap(bitmap, reqWidth, reqHeight);
+    }
 
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(res, resId, options);
+    public static Bitmap resizeBitmap(Bitmap bitmap, int reqWidth, int reqHeight) {
+        int bitmapHeight = bitmap.getHeight();
+        int bitmapWidth = bitmap.getWidth();
+        int scaledHeight, scaledWidth, cropStartX, cropStartY;
+        float ratio;
+        if (bitmapHeight > bitmapWidth) {
+            ratio = bitmapWidth / (float) reqWidth;
+        } else {
+            ratio = bitmapHeight / (float) reqHeight;
+        }
+        scaledHeight = (int) Math.ceil(bitmapHeight / ratio);
+        scaledWidth = (int) Math.ceil(bitmapWidth / ratio);
+        cropStartX = (scaledWidth - reqWidth ) / 2;
+        cropStartY = (scaledHeight - reqHeight) / 2;
+        bitmap = Bitmap.createScaledBitmap(bitmap, scaledWidth, scaledHeight, false);
+        bitmap = Bitmap.createBitmap(bitmap, cropStartX, cropStartY, reqWidth, reqHeight);
+        return bitmap;
     }
 
     public static int getImageRotation(Resources res, int resId) {

@@ -4,11 +4,29 @@ package com.studio.swallowcharchar.happybirthday2016.database;
  * Created by Swallow on 7/8/16.
  */
 public class Album {
+    /**
+     * database_album.json :
+     * -----------------------------------------------------------
+     * * albumResName : Img file name, excluding path.           *
+     * * source       : 0: from mipmap, 1: internal 2: external. *
+     * * title        : Title for album.                         *
+     * * description  : Description for album.                   *
+     * * photoResIds  : Index of photos contained in the ablum.  *
+     * * place        : Where album is created.                  *
+     * * time         : When album is create.                    *
+     * * tags         : Tags of album (union of tags of photos). *
+     * -----------------------------------------------------------
+     */
+
+    public static final int SOURCE_MIPMAP = 0x0;
+    public static final int SOURCE_INTERNAL = 0x1;
+    public static final int SOURCE_EXTERNAL = 0x2;
 
     /**
      * The names are used for auto data filled in by GSON
      * */
     private String albumResName;
+    private int source;
     private String title;
     private String description;
     private int[] photoResIds;
@@ -16,8 +34,9 @@ public class Album {
     private int[] time;
     private String[] tags;
 
-    public Album(String albumResName, String title, String description, int[] photoResIds, String place, int[] time, String[] tags) {
+    public Album(String albumResName, int source, String title, String description, int[] photoResIds, String place, int[] time, String[] tags) {
         this.albumResName = albumResName;
+        this.source = source;
         this.title = title;
         this.description = description;
         this.photoResIds = photoResIds;
@@ -28,6 +47,10 @@ public class Album {
 
     public void setAlbumResName(String albumResName) {
         this.albumResName = albumResName;
+    }
+
+    public void setSource(int source) {
+        this.source = source;
     }
 
     public void setTitle(String title) {
@@ -56,6 +79,10 @@ public class Album {
 
     public String getAlbumResName() {
         return albumResName;
+    }
+
+    public int getSource() {
+        return source;
     }
 
     public String getTitle() {

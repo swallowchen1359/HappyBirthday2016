@@ -49,11 +49,18 @@ public class PhotoView extends ScrollView {
         mPhotoIntro.setCoverImage(bitmap);
     }
 
-    public void setPhotos(LinkedList<Integer> resIds) {
+    public void setPhoto(Bitmap bitmap) {
         if (mPhotoGallery == null) {
             mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
         }
-        mPhotoGallery.setGallery(resIds);
+        mPhotoGallery.setGallery(bitmap);
+    }
+
+    public void setPhotos(LinkedList<Bitmap> bitmapLinkedList) {
+        if (mPhotoGallery == null) {
+            mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
+        }
+        mPhotoGallery.setGallery(bitmapLinkedList);
     }
 
     public void setTags(LinkedList<String> tagStrs) {

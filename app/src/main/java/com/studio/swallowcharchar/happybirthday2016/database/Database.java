@@ -23,7 +23,6 @@ public class Database {
     private static final int RAW_JSON_RES_ID_s[] = {
         0,
         R.raw.database_album,
-        /** Album and Photo will read the same json file */
         R.raw.database_photo
     };
 
