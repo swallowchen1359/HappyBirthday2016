@@ -147,7 +147,7 @@ public class AlbumView extends RecyclerView {
             /** Create a CardView, belongs to parent*/
             AlbumCardView v = (AlbumCardView) ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(VIEW_CARD_RES_ID, null, true);
             /** CardView size is specified in xml */
-            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(0, 10, 0, 10);
             v.setLayoutParams(layoutParams);
             AlbumViewHolder vh = new AlbumViewHolder(v);

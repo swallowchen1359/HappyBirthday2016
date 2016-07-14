@@ -74,7 +74,7 @@ public class AlbumModel {
          * entered index.
          * */
         for (int i = 0; i < mAlbumArrayList.size(); i++) {
-            mAlbumPictureList.add(mContext.getResources().getIdentifier(mAlbumArrayList.get(i).getAlbumResName(), "mipmap", mContext.getPackageName()));
+            mAlbumPictureList.add(mContext.getResources().getIdentifier(mAlbumArrayList.get(i).getAlbumResName(), "drawable", mContext.getPackageName()));
         }
         return mAlbumPictureList;
     }

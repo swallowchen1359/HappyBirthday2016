@@ -48,7 +48,7 @@
                                 android:transitionName="@string/transition_image_album_and_photo"
                                 android:layout_width="@dimen/photo_intro_cover_width"
                                 android:layout_height="@dimen/photo_intro_cover_width"
-                                android:src="@mipmap/dsc_0867"
+                                android:background="@color/default_img_background"
                                 android:scaleType="centerCrop"/>
                         </LinearLayout>
                         <LinearLayout
@@ -80,7 +80,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/ic_schedule_black_36dp"
+                                android:src="@drawable/ic_schedule_black_36dp"
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
@@ -101,7 +101,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/ic_insert_photo_black_36dp"
+                                android:src="@drawable/ic_insert_photo_black_36dp"
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
@@ -122,7 +122,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/ic_place_black_36dp"
+                                android:src="@drawable/ic_place_black_36dp"
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
@@ -142,7 +142,7 @@
                             <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@mipmap/ic_create_black_36dp"
+                                android:src="@drawable/ic_create_black_36dp"
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView

@@ -10,4 +10,5 @@
     <color name="colorBlack">#FF000000</color>
 
     <color name="text_card_function">#FF9FA5AF</color>
+    <color name="default_img_background">#FF9FA5AF</color>
 </resources>
