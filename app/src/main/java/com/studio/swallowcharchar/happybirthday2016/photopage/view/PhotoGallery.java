@@ -2,6 +2,7 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.AttributeSet;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 
 import java.util.LinkedList;
@@ -167,12 +169,20 @@ public class PhotoGallery extends ViewGroup {
         }
     }
 
+    private int mPhotoSize;
+
     public PhotoGallery(Context context) {
         this(context, null);
     }
 
     public PhotoGallery(Context context, AttributeSet attrs) {
         super(context, attrs);
+        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.PhotoGallery, 0, 0);
+        try {
+            mPhotoSize = (int) ta.getDimension(R.styleable.PhotoGallery_photoSize, 330);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setGallery(LinkedList<Bitmap> bitmapLinkedList) {
@@ -188,7 +198,7 @@ public class PhotoGallery extends ViewGroup {
     private void createImageView(Bitmap bitmap) {
         ImageView imageView = new ImageView(getContext());
         imageView.setImageBitmap(bitmap);
-        PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(330, 330);
+        PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(mPhotoSize, mPhotoSize);
         layoutParams.setMargins(5,5,5,5);
         imageView.setLayoutParams(layoutParams);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

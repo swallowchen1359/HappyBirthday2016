@@ -12,4 +12,7 @@
 
     <!-- Transition Name TAGs -->
     <string name="transition_image_album_and_photo">TransitionImageAlbumAndPhoto</string>
+
+    <!-- PhotoFragment -->
+    <string name="fragment_photo_album_editor">編輯相簿</string>
 </resources>

@@ -84,6 +84,7 @@
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
+                                android:id="@+id/photo_intro_time_text_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="6pt"
@@ -105,6 +106,7 @@
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
+                                android:id="@+id/photo_intro_num_text_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="6pt"
@@ -126,7 +128,8 @@
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/photo_intro_place_text_view"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="6pt"
                                 android:text="心之芳庭"/>
@@ -146,9 +149,10 @@
                                 android:layout_marginRight="@dimen/photo_intro_item_margin"/>
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/photo_intro_editor_text_view"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="編輯相簿"/>
+                                android:text="@string/fragment_photo_album_editor"/>
                         </LinearLayout>
 
                     </LinearLayout>

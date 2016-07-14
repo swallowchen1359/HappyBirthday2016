@@ -28,4 +28,8 @@
     <declare-styleable name="SwallowTextView">
         <attr name="ttf_name" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="PhotoGallery">
+        <attr name="photoSize" format="dimension"/>
+    </declare-styleable>
 </resources>

@@ -3,6 +3,7 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ScrollView;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
@@ -14,6 +15,13 @@ import java.util.LinkedList;
  */
 public class PhotoView extends ScrollView {
 
+    public interface EventListener {
+        void onEditorClick(int mode);
+    }
+
+    public static final int MODE_NORMAL = 0x0;
+    public static final int MODE_EDITOR = 0x1;
+
     private static final int VIEW_INTRO_RES_ID = R.id.photo_intro;
     private static final int VIEW_GALLERY_RES_ID = R.id.photo_gallery;
     private static final int VIEW_TAG_AREA_RES_ID = R.id.photo_tag_area;
@@ -21,6 +29,8 @@ public class PhotoView extends ScrollView {
     private PhotoIntro mPhotoIntro;
     private PhotoGallery mPhotoGallery;
     private PhotoTagArea mPhotoTagArea;
+
+    private EventListener mEventListener;
 
     public PhotoView(Context context) {
         this(context, null);
@@ -33,6 +43,26 @@ public class PhotoView extends ScrollView {
     public PhotoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        if (mPhotoIntro == null) {
+            mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
+        }
+        mPhotoIntro.setOnEditorClickListener(new PhotoIntro.OnEditorClickListener() {
+            @Override
+            public void onEditorClick(int mode) {
+                if (mEventListener != null) {
+                    mEventListener.onEditorClick(mode);
+                }
+            }
+        });
+    }
+
+    public void setEventListener(EventListener listener) {
+        mEventListener = listener;
     }
 
     public void setCover(int resId) {
@@ -68,5 +98,17 @@ public class PhotoView extends ScrollView {
             mPhotoTagArea = (PhotoTagArea) findViewById(VIEW_TAG_AREA_RES_ID);
         }
         mPhotoTagArea.setTags(tagStrs);
+    }
+
+    public void enterEditorMode() {
+        if (mPhotoIntro != null) {
+            mPhotoIntro.enterEditorMode();
+        }
+    }
+
+    public void exitEditorMode() {
+        if (mPhotoIntro != null) {
+            mPhotoIntro.exitEditorMode();
+        }
     }
 }

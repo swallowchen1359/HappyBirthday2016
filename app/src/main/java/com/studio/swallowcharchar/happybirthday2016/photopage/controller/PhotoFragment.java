@@ -17,7 +17,7 @@ import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks {
+public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks, PhotoView.EventListener {
     private static final int VIEW_RES_ID = R.layout.fragment_photo;
     private static final int VIEW_ALBUM_RES_ID = R.id.photo_view;
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
@@ -46,6 +46,8 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks 
         mPhotoView = (PhotoView) mainView.findViewById(VIEW_ALBUM_RES_ID);
         /** PhotoModel should initialize when onAttach */
         if (mModel != null && mPhotoView != null) {
+            /** register event handler here */
+            mPhotoView.setEventListener(this);
             /** After create and load done, callback will be awaken to do some jobs */
             mModel.createPhotoLoader();
         } else {
@@ -83,5 +85,15 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks 
     @Override
     public void onBitmapCreateDone(Bitmap bitmap) {
         mPhotoView.setPhoto(bitmap);
+    }
+
+    /******************************* PhotoView.EventListener **************************************/
+    @Override
+    public void onEditorClick(int mode) {
+        if (mode == PhotoView.MODE_EDITOR) {
+            mPhotoView.exitEditorMode();
+        } else {
+            mPhotoView.enterEditorMode();
+        }
     }
 }
