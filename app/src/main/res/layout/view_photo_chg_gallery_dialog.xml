@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swallow="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/photo_dialog_view"
+    android:layout_width="@dimen/photo_dialog_width"
+    android:layout_height="@dimen/photo_dialog_height">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Top PhotoGallery : showing current existing pictures in the album -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                swallow:photoSize="80dp"/>
+
+        </LinearLayout>
+
+        <!-- Border -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/rect_top_border"/>
+
+        <!-- Bot PhotoGallery : showing all picture that can be added -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
+
+            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                swallow:photoSize="80dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView>

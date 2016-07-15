@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swallow="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/photo_dialog_view"
+    android:layout_width="@dimen/photo_dialog_width"
+    android:layout_height="@dimen/photo_dialog_height">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Area of entering the modification -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_place_schedule_36dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="2016/07/07"/>
+
+        </LinearLayout>
+
+        <!-- Area to put date picker, for future use -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView>
