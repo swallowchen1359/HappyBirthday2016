@@ -114,17 +114,11 @@ public class PhotoIntro extends LinearLayout {
     }
 
     public void setCoverImage(Bitmap bitmap) {
-        if (mCoverImageView == null) {
-            mCoverImageView = (ImageView) findViewById(VIEW_COVER_RES_ID);
-        }
         mCoverImageView.setImageBitmap(bitmap);
     }
 
-    public void setCoverImage(int resId) {
-        if (mCoverImageView == null) {
-            mCoverImageView = (ImageView) findViewById(VIEW_COVER_RES_ID);
-        }
-        mCoverImageView.setImageResource(resId);
+    public void setDate(int year, int month, int day) {
+        mTimeTextView.setText(year + "/" + month + "/" + day);
     }
 
     public void setOnEditorClickListener(OnEditorClickListener listener) {

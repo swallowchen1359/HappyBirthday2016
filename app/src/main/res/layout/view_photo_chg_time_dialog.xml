@@ -4,42 +4,30 @@
     android:id="@+id/photo_dialog_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:background="#90000000">
+    android:background="#90000000"
+    android:gravity="center">
 
     <android.support.v7.widget.CardView
-        android:layout_width="@dimen/photo_dialog_width"
-        android:layout_height="@dimen/photo_dialog_height">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Area of entering the modification -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_schedule_black_36dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="2016/07/07"/>
-
-            </LinearLayout>
-
             <!-- Area to put date picker, for future use -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="9">
+
+                <DatePicker
+                    android:id="@+id/photo_dialog_date_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:calendarTextColor="#ff000000"
+                    android:datePickerMode="calendar"/>
 
             </LinearLayout>
 

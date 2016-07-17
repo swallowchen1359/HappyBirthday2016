@@ -45,7 +45,6 @@ public class PhotoView extends ScrollView {
 
     public PhotoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
     }
 
     @Override
@@ -54,6 +53,15 @@ public class PhotoView extends ScrollView {
         if (mPhotoIntro == null) {
             mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
         }
+
+        if(mPhotoGallery == null) {
+            mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
+        }
+
+        if (mPhotoTagArea == null) {
+            mPhotoTagArea = (PhotoTagArea) findViewById(VIEW_TAG_AREA_RES_ID);
+        }
+
         mPhotoIntro.setOnEditorClickListener(new PhotoIntro.OnEditorClickListener() {
             @Override
             public void onEditorClick(int mode) {
@@ -89,50 +97,27 @@ public class PhotoView extends ScrollView {
         mEventListener = listener;
     }
 
-    public void setCover(int resId) {
-        if (mPhotoIntro == null) {
-            mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
-        }
-        mPhotoIntro.setCoverImage(resId);
-    }
-
     public void setCover(Bitmap bitmap) {
-        if (mPhotoIntro == null) {
-            mPhotoIntro = (PhotoIntro) findViewById(VIEW_INTRO_RES_ID);
-        }
         mPhotoIntro.setCoverImage(bitmap);
     }
 
+    public void setDate(int year, int month, int day) {
+        mPhotoIntro.setDate(year, month, day);
+    }
+
     public void setPhoto(Bitmap bitmap) {
-        if (mPhotoGallery == null) {
-            mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
-        }
         mPhotoGallery.setGallery(bitmap);
     }
 
-    public void setPhotos(LinkedList<Bitmap> bitmapLinkedList) {
-        if (mPhotoGallery == null) {
-            mPhotoGallery = (PhotoGallery) findViewById(VIEW_GALLERY_RES_ID);
-        }
-        mPhotoGallery.setGallery(bitmapLinkedList);
-    }
-
     public void setTags(LinkedList<String> tagStrs) {
-        if (mPhotoTagArea == null) {
-            mPhotoTagArea = (PhotoTagArea) findViewById(VIEW_TAG_AREA_RES_ID);
-        }
         mPhotoTagArea.setTags(tagStrs);
     }
 
     public void enterEditorMode() {
-        if (mPhotoIntro != null) {
-            mPhotoIntro.enterEditorMode();
-        }
+        mPhotoIntro.enterEditorMode();
     }
 
     public void exitEditorMode() {
-        if (mPhotoIntro != null) {
-            mPhotoIntro.exitEditorMode();
-        }
+        mPhotoIntro.exitEditorMode();
     }
 }

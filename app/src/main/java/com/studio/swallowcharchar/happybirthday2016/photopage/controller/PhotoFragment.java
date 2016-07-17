@@ -17,6 +17,7 @@ import com.studio.swallowcharchar.happybirthday2016.photopage.PhotoActivity;
 import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoModel;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView;
+import com.studio.swallowcharchar.happybirthday2016.widget.DialogFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -127,8 +128,19 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
 
     @Override
     public void onTimeClick(int mode) {
+        PhotoTimeDialogFragment photoTimeDialogFragment = null;
         if (mode == PhotoView.MODE_EDITOR) {
-            ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_TIME);
+            photoTimeDialogFragment = (PhotoTimeDialogFragment) ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_TIME);
+        }
+
+        if (photoTimeDialogFragment != null) {
+            photoTimeDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
+                @Override
+                public void onDialogFinish(Object obj) {
+                    PhotoTimeDialogFragment.PickedDate pickedDate = (PhotoTimeDialogFragment.PickedDate) obj;
+                    mPhotoView.setDate(pickedDate.getYear(), pickedDate.getMonth(), pickedDate.getDay());
+                }
+            });
         }
     }
 }

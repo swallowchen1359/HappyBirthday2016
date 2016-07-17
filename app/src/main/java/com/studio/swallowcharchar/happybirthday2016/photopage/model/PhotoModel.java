@@ -212,8 +212,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         }
         Bitmap bitmap = null;
 
-        for (mImageMediaCursor.moveToFirst(); !mImageMediaCursor.isAfterLast();mImageMediaCursor.moveToNext()) {
-            /** TODO: use a constant value to identified what data to get */
+        for (mImageMediaCursor.moveToFirst(); !mImageMediaCursor.isAfterLast() && !mImageMediaCursor.isClosed();mImageMediaCursor.moveToNext()) {
             if (!mImageMediaCursor.getString(IDX_MEDIA_EXTERNAL_DISPLAY_NAME).equals(fileStr)) {
                 continue;
             }

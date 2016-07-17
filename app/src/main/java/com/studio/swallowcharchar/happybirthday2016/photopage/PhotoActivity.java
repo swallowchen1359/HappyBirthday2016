@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoCoverDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoFragment;
+import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoTimeDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 
 public class PhotoActivity extends Activity {
@@ -60,12 +62,22 @@ public class PhotoActivity extends Activity {
         fragmentTransaction.commit();
     }
 
-    public void attachDialogFragment(int dialogMode) {
+    public PhotoDialogFragment attachDialogFragment(int dialogMode) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         String bundleStr = getResources().getString(STRING_BUNGLE_DIALOG);
-
-        PhotoDialogFragment photoDialogFragment = new PhotoDialogFragment();
+        PhotoDialogFragment photoDialogFragment;
+        switch(dialogMode) {
+            case PhotoDialogView.IDX_STYLE_CHG_COVER:
+                photoDialogFragment = new PhotoCoverDialogFragment();
+                break;
+            case PhotoDialogView.IDX_STYLE_CHG_TIME:
+                photoDialogFragment = new PhotoTimeDialogFragment();
+                break;
+            default:
+                photoDialogFragment = new PhotoDialogFragment();
+                break;
+        }
         Bundle bundle = new Bundle();
         bundle.putInt(bundleStr, dialogMode);
         photoDialogFragment.setArguments(bundle);
@@ -73,5 +85,7 @@ public class PhotoActivity extends Activity {
         fragmentTransaction.add(VIEW_ROOT_RES_ID, photoDialogFragment, photoDialogFragment.getCallerTag());
         fragmentTransaction.addToBackStack(photoDialogFragment.getCallerTag());
         fragmentTransaction.commit();
+
+        return photoDialogFragment;
     }
 }
