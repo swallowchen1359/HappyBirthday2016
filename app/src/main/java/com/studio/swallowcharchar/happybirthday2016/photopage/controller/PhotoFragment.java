@@ -2,6 +2,8 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.controller;
 
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.photopage.PhotoActivity;
 import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoModel;
+import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView;
 
 /**
@@ -22,15 +26,20 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
     private static final int VIEW_ALBUM_RES_ID = R.id.photo_view;
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
 
-    private static final int URL_LOADER = 0;
-
     private PhotoView mPhotoView;
     private PhotoModel mModel;
 
     private int mAlbumOnClickPosition;
 
+    /**
+     * the parameter mCurrentMode is used to identify current mode of PhotoView
+     * MODE_EDITOR or MODE_NORMAL
+     * */
+    private int mCurrentMode;
+
     public PhotoFragment() {
         // Required empty public constructor
+        mCurrentMode = PhotoView.MODE_NORMAL;
     }
 
     @Override
@@ -65,6 +74,10 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
         mModel.initModel();
     }
 
+    public int getCurrentMode() {
+        return mCurrentMode;
+    }
+
     /******************************* PhotoModel.TaskCallbacks ************************************/
     @Override
     public void onInitModelDone() {
@@ -94,6 +107,28 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
             mPhotoView.exitEditorMode();
         } else {
             mPhotoView.enterEditorMode();
+        }
+        mCurrentMode = mode;
+    }
+
+    @Override
+    public void onCoverClick(int mode) {
+        if (mode == PhotoView.MODE_EDITOR) {
+            ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_COVER);
+        }
+    }
+
+    @Override
+    public void onPlaceClick(int mode) {
+        if (mode == PhotoView.MODE_EDITOR) {
+            ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_PLACE);
+        }
+    }
+
+    @Override
+    public void onTimeClick(int mode) {
+        if (mode == PhotoView.MODE_EDITOR) {
+            ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_TIME);
         }
     }
 }

@@ -3,47 +3,55 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swallow="http://schemas.android.com/apk/res-auto"
     android:id="@+id/photo_dialog_view"
-    android:layout_width="@dimen/photo_dialog_width"
-    android:layout_height="@dimen/photo_dialog_height">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#90000000">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/photo_dialog_width"
+        android:layout_height="@dimen/photo_dialog_height">
 
-        <!-- Top PhotoGallery : showing current existing pictures in the album -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+            <!-- Top PhotoGallery : showing current existing pictures in the album -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                swallow:photoSize="80dp"/>
+                android:layout_height="0dp"
+                android:layout_weight="10">
+
+                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    swallow:photoSize="80dp"/>
+
+            </LinearLayout>
+
+            <!-- Border -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/rect_top_border"/>
+
+            <!-- Bot PhotoGallery : showing all picture that can be added -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10">
+
+                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    swallow:photoSize="80dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Border -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@drawable/rect_top_border"/>
-
-        <!-- Bot PhotoGallery : showing all picture that can be added -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10">
-
-            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                swallow:photoSize="80dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView>

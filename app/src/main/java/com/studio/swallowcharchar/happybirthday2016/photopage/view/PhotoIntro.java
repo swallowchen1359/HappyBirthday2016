@@ -7,7 +7,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +20,9 @@ import com.studio.swallowcharchar.happybirthday2016.R;
 public class PhotoIntro extends LinearLayout {
     public interface OnEditorClickListener {
         void onEditorClick(int mode);
+        void onCoverClick(int mode);
+        void onPlaceClick(int mode);
+        void onTimeClick(int mode);
     }
 
     private static final int VIEW_COVER_RES_ID = R.id.photo_intro_cover;
@@ -82,6 +84,33 @@ public class PhotoIntro extends LinearLayout {
                 }
             }
         });
+
+        mCoverImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnEditorClickListener != null) {
+                    mOnEditorClickListener.onCoverClick(mCurrentMode);
+                }
+            }
+        });
+
+        mPlaceTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnEditorClickListener != null) {
+                    mOnEditorClickListener.onPlaceClick(mCurrentMode);
+                }
+            }
+        });
+
+        mTimeTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnEditorClickListener != null) {
+                    mOnEditorClickListener.onTimeClick(mCurrentMode);
+                }
+            }
+        });
     }
 
     public void setCoverImage(Bitmap bitmap) {
@@ -103,7 +132,6 @@ public class PhotoIntro extends LinearLayout {
     }
 
     public void enterEditorMode() {
-        Log.d("PhotoIntro", "enterEditorMode()");
         mCurrentMode = PhotoView.MODE_EDITOR;
         /** first time entering editor mode */
         if (mEditorModeAnimatorSet == null) {
@@ -114,7 +142,6 @@ public class PhotoIntro extends LinearLayout {
     }
 
     public void exitEditorMode() {
-        Log.d("PhotoIntro", "exitEditorMode()");
         mCurrentMode = PhotoView.MODE_NORMAL;
         mEditorModeAnimatorSet.cancel();
     }
@@ -164,7 +191,6 @@ public class PhotoIntro extends LinearLayout {
 
         @Override
         public void onAnimationEnd(Animator animation) {
-            Log.d("PhotoIntro", "onAnimationEnd");
             if (!mCanceled) {
                 animation.start();
             }
@@ -172,7 +198,6 @@ public class PhotoIntro extends LinearLayout {
 
         @Override
         public void onAnimationCancel(Animator animation) {
-            Log.d("PhotoIntro", "onAnimationCancel");
             mCanceled = true;
         }
 

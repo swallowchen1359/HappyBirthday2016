@@ -3,54 +3,61 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swallow="http://schemas.android.com/apk/res-auto"
     android:id="@+id/photo_dialog_view"
-    android:layout_width="@dimen/photo_dialog_width"
-    android:layout_height="@dimen/photo_dialog_height">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#90000000">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:layout_width="@dimen/photo_dialog_width"
+        android:layout_height="@dimen/photo_dialog_height">
 
-        <!-- A square area to put cover preview -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/photo_dialog_width">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
+            <!-- A square area to put cover preview -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/default_img_background"/>
+                android:layout_height="@dimen/photo_dialog_width">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/default_img_background"/>
+
+            </LinearLayout>
+
+            <!-- Area for gallery -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4">
+
+                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    swallow:photoSize="80dp"/>
+
+            </LinearLayout>
+
+            <!-- Area for confirm button -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Confirm"
+                    android:textSize="12pt"/>
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <!-- Area for gallery -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4">
-
-            <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                swallow:photoSize="80dp"/>
-
-        </LinearLayout>
-
-        <!-- Area for confirm button -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Confirm"
-                android:textSize="12pt"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView>

@@ -1,6 +1,7 @@
 package com.studio.swallowcharchar.happybirthday2016.photopage;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -8,14 +9,18 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoFragment;
+import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 
 public class PhotoActivity extends Activity {
 
     private static final int VIEW_RES_ID = R.layout.activity_photo;
+    private static final int VIEW_ROOT_RES_ID = R.id.photo_fragment;
     private static final int VIEW_CONTAINER_RES_ID = R.id.photo_fragment_container;
     private static final int STRING_TAG_PHOTO_FRAGMENT_RES_ID = R.string.tag_photo_fragment;
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
+    private static final int STRING_BUNGLE_DIALOG = R.string.bundle_dialog_style;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,11 @@ public class PhotoActivity extends Activity {
         int albumOnClickPosition = intent.getIntExtra(bundleStr, 0);
         setContentView(VIEW_RES_ID);
         attachFragment(albumOnClickPosition);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     /**
@@ -50,8 +60,18 @@ public class PhotoActivity extends Activity {
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public void attachDialogFragment(int dialogMode) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        String bundleStr = getResources().getString(STRING_BUNGLE_DIALOG);
+
+        PhotoDialogFragment photoDialogFragment = new PhotoDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(bundleStr, dialogMode);
+        photoDialogFragment.setArguments(bundle);
+
+        fragmentTransaction.add(VIEW_ROOT_RES_ID, photoDialogFragment, photoDialogFragment.getCallerTag());
+        fragmentTransaction.addToBackStack(photoDialogFragment.getCallerTag());
+        fragmentTransaction.commit();
     }
 }

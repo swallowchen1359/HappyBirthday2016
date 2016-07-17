@@ -244,10 +244,6 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         mImageMediaCursor = data;
-        Log.d("PhotoModel", "thumbnail count " + mImageMediaCursor.getCount());
-        for (mImageMediaCursor.moveToFirst(); !mImageMediaCursor.isAfterLast(); mImageMediaCursor.moveToNext()) {
-            Log.d("PhotoModel", "ExternalResourceName " + mImageMediaCursor.getString(IDX_MEDIA_EXTERNAL_DISPLAY_NAME));
-        }
         /** Awake Callback (In PhotoFragment) */
         if (mTaskCallbacks != null) {
             mTaskCallbacks.onLoadDone();

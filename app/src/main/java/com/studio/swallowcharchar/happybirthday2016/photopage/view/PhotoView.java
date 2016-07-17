@@ -17,6 +17,9 @@ public class PhotoView extends ScrollView {
 
     public interface EventListener {
         void onEditorClick(int mode);
+        void onCoverClick(int mode);
+        void onPlaceClick(int mode);
+        void onTimeClick(int mode);
     }
 
     public static final int MODE_NORMAL = 0x0;
@@ -56,6 +59,27 @@ public class PhotoView extends ScrollView {
             public void onEditorClick(int mode) {
                 if (mEventListener != null) {
                     mEventListener.onEditorClick(mode);
+                }
+            }
+
+            @Override
+            public void onCoverClick(int mode) {
+                if (mEventListener != null) {
+                    mEventListener.onCoverClick(mode);
+                }
+            }
+
+            @Override
+            public void onPlaceClick(int mode) {
+                if (mEventListener != null) {
+                    mEventListener.onPlaceClick(mode);
+                }
+            }
+
+            @Override
+            public void onTimeClick(int mode) {
+                if (mEventListener != null) {
+                    mEventListener.onTimeClick(mode);
                 }
             }
         });

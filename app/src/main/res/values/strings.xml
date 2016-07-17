@@ -9,10 +9,15 @@
     <!-- Fragment TAGs -->
     <string name="tag_album_fragment">AlbumFragment</string>
     <string name="tag_photo_fragment">PhotoFragment</string>
+    <string name="tag_photo_chg_cover_dialog">PhotoChgCoverDialog</string>
+    <string name="tag_photo_chg_time_dialog">PhotoChgTimeDialog</string>
+    <string name="tag_photo_chg_place_dialog">PhotoChgPlaceDialog</string>
+    <string name="tag_photo_chg_gallery_dialog">PhotoChgGalleryDialog</string>
 
     <!-- Transition Name TAGs -->
     <string name="transition_image_album_and_photo">TransitionImageAlbumAndPhoto</string>
 
     <!-- PhotoFragment -->
     <string name="fragment_photo_album_editor">編輯相簿</string>
+    <string name="bundle_dialog_style">DialogStyle</string>
 </resources>

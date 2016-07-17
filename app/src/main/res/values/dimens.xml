@@ -24,5 +24,7 @@
     <dimen name="photo_intro_cover_height">140dp</dimen>
     <dimen name="photo_intro_item_margin">5dp</dimen>
     <dimen name="photo_intro_tag_margin">5dp</dimen>
+    <dimen name="photo_dialog_width">240dp</dimen>
+    <dimen name="photo_dialog_height">360dp</dimen>
 
 </resources>
