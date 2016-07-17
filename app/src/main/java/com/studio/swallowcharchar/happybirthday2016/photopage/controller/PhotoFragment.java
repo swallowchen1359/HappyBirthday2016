@@ -2,8 +2,6 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.controller;
 
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -114,25 +112,61 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
 
     @Override
     public void onCoverClick(int mode) {
+        /** PhotoTimeDialogFragment is used only for cover */
+        PhotoCoverDialogFragment photoCoverDialogFragment = null;
         if (mode == PhotoView.MODE_EDITOR) {
             ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_COVER);
+        }
+
+        /**
+         * The call back function for handling dialog result.
+         * Because the call back is dialog only and dialog is activity keeping and handling,
+         * so call back implement here, rather than fragment
+         * */
+        if (photoCoverDialogFragment != null) {
+            photoCoverDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
+                @Override
+                public void onDialogFinish(Object obj) {
+                }
+            });
         }
     }
 
     @Override
     public void onPlaceClick(int mode) {
+        /** PhotoTimeDialogFragment is used only for place */
+        PhotoPlaceDialogFragment photoPlaceDialogFragment = null;
         if (mode == PhotoView.MODE_EDITOR) {
             ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_PLACE);
+        }
+
+        /**
+         * The call back function for handling dialog result.
+         * Because the call back is dialog only and dialog is activity keeping and handling,
+         * so call back implement here, rather than fragment
+         * */
+        if (photoPlaceDialogFragment != null) {
+            photoPlaceDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
+                @Override
+                public void onDialogFinish(Object obj) {
+                }
+            });
         }
     }
 
     @Override
     public void onTimeClick(int mode) {
+        /** PhotoTimeDialogFragment is used only for time */
         PhotoTimeDialogFragment photoTimeDialogFragment = null;
         if (mode == PhotoView.MODE_EDITOR) {
             photoTimeDialogFragment = (PhotoTimeDialogFragment) ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_TIME);
         }
 
+        /**
+         * The call back function for handling dialog result.
+         * Because the call back is dialog only and dialog is activity keeping and handling,
+         * so call back implement here, rather than fragment
+         * */
         if (photoTimeDialogFragment != null) {
             photoTimeDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
                 @Override
