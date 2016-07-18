@@ -87,6 +87,27 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         mPhotoTagList = new LinkedList<>();
     }
 
+    public boolean initModel() {
+        mAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
+        mPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);
+        /** Awake Callback (In PhotoFragment) */
+        if (mTaskCallbacks != null) {
+            mTaskCallbacks.onInitModelDone();
+        }
+        return mPhotoArrayList != null ;
+    }
+
+    public void setTaskCallbacks(TaskCallbacks callbacks) {
+        mTaskCallbacks = callbacks;
+    }
+
+    public void createPhotoLoader() {
+        if (mContext == null) {
+            return;
+        }
+        ((Activity)mContext).getLoaderManager().initLoader(URL_LOADER, null, this);
+    }
+
     /**
      * @param position is the position according to AlbumView
      * The function will keep send Bitmap to callback function onBitmapCreateDone
@@ -94,7 +115,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
      * @return The last bitmap
      * */
     public Bitmap getPhotoPictureBitmap(int position) {
-        if (mContext == null || mPhotoArrayList == null || mAlbumArrayList == null) {
+        if (mContext == null || mPhotoArrayList == null || mAlbumArrayList == null || mImageMediaCursor == null) {
             return null;
         }
 
@@ -140,7 +161,9 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
 
                     @Override
                     protected void onPostExecute(Bitmap bitmap) {
-                        mTaskCallbacks.onBitmapCreateDone(bitmap);
+                        if (mTaskCallbacks != null) {
+                            mTaskCallbacks.onBitmapCreateDone(bitmap);
+                        }
                     }
                 }.execute(photoObject);
             }
@@ -185,25 +208,36 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return mPhotoTagList;
     }
 
-    public void setTaskCallbacks(TaskCallbacks callbacks) {
-        mTaskCallbacks = callbacks;
-    }
-
-    public boolean initModel() {
-        mAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
-        mPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);
-        /** Awake Callback (In PhotoFragment) */
-        if (mTaskCallbacks != null) {
-            mTaskCallbacks.onInitModelDone();
+    public Bitmap getAvailableBitmap() {
+        if (mImageMediaCursor == null) {
+            return null;
         }
-        return mPhotoArrayList != null ;
-    }
+        for (mImageMediaCursor.moveToFirst(); !mImageMediaCursor.isAfterLast() && !mImageMediaCursor.isClosed();mImageMediaCursor.moveToNext()) {
+            File file = new File(mImageMediaCursor.getString(IDX_MEDIA_EXTERNAL_DATA));
+            Uri imgUri = Uri.fromFile(file);
+            new AsyncTask<Uri, Void, Bitmap>() {
+                @Override
+                protected Bitmap doInBackground(Uri... params) {
+                    Bitmap bitmap = null;
+                    try {
+                        Uri uri = params[0];
+                        bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri);
+                        bitmap = ImageUtility.resizeBitmap(bitmap, 200, 200);
+                    } catch(IOException e) {
+                        e.printStackTrace();
+                    }
+                    return bitmap;
+                }
 
-    public void createPhotoLoader() {
-        if (mContext == null) {
-            return;
+                @Override
+                protected void onPostExecute(Bitmap bitmap) {
+                    if (mTaskCallbacks != null) {
+                        mTaskCallbacks.onBitmapCreateDone(bitmap);
+                    }
+                }
+            }.execute(imgUri);
         }
-        ((Activity)mContext).getLoaderManager().initLoader(URL_LOADER, null, this);
+        return null;
     }
 
     private Bitmap getBitmapFromCursor(String fileStr) {

@@ -177,4 +177,26 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
             });
         }
     }
+
+    @Override
+    public void onAddPhotoClick(int mode) {
+        /** PhotoTimeDialogFragment is used only for time */
+        PhotoGalleryDialogFragment photoGalleryDialogFragment = null;
+        if (mode == PhotoView.MODE_EDITOR) {
+            photoGalleryDialogFragment = (PhotoGalleryDialogFragment) ((PhotoActivity) getActivity()).attachDialogFragment(PhotoDialogView.IDX_STYLE_CHG_GALLERY);
+        }
+
+        /**
+         * The call back function for handling dialog result.
+         * Because the call back is dialog only and dialog is activity keeping and handling,
+         * so call back implement here, rather than fragment
+         * */
+        if (photoGalleryDialogFragment != null) {
+            photoGalleryDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
+                @Override
+                public void onDialogFinish(Object obj) {
+                }
+            });
+        }
+    }
 }

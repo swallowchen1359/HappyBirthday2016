@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView
+<com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swallow="http://schemas.android.com/apk/res-auto"
     android:id="@+id/photo_dialog_view"
@@ -10,23 +10,31 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="@dimen/photo_dialog_width"
-        android:layout_height="@dimen/photo_dialog_height">
+        android:layout_height="@dimen/photo_dialog_height"
+        android:clickable="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Top PhotoGallery : showing current existing pictures in the album -->
+            <!-- Top PhotoGallery : showing all pictures can be added -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="10">
 
-                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    swallow:photoSize="80dp"/>
+                    android:layout_height="wrap_content">
+
+                    <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
+                        android:id="@+id/photo_dialog_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        swallow:photoSize="75dp"/>
+
+                </ScrollView>
 
             </LinearLayout>
 
@@ -37,21 +45,14 @@
                 android:layout_weight="1"
                 android:background="@drawable/rect_top_border"/>
 
-            <!-- Bot PhotoGallery : showing all picture that can be added -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="10">
-
-                <com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGallery
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    swallow:photoSize="80dp"/>
-
-            </LinearLayout>
+                android:layout_weight="3"
+                android:background="@color/default_img_background"/>
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
-</com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView>
+</com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView>
