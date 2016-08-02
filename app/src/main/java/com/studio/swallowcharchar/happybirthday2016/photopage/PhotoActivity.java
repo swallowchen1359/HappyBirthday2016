@@ -12,6 +12,7 @@ import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoCoverDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoFragment;
+import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoGalleryDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.controller.PhotoTimeDialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 
@@ -73,6 +74,9 @@ public class PhotoActivity extends Activity {
                 break;
             case PhotoDialogView.IDX_STYLE_CHG_TIME:
                 photoDialogFragment = new PhotoTimeDialogFragment();
+                break;
+            case PhotoDialogView.IDX_STYLE_CHG_GALLERY:
+                photoDialogFragment = new PhotoGalleryDialogFragment();
                 break;
             default:
                 photoDialogFragment = new PhotoDialogFragment();

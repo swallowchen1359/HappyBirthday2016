@@ -15,11 +15,13 @@ import java.util.LinkedList;
  */
 public class PhotoView extends ScrollView {
 
+    /** Editor mode event */
     public interface EventListener {
         void onEditorClick(int mode);
         void onCoverClick(int mode);
         void onPlaceClick(int mode);
         void onTimeClick(int mode);
+        void onAddPhotoClick(int mode);
     }
 
     public static final int MODE_NORMAL = 0x0;
@@ -91,6 +93,15 @@ public class PhotoView extends ScrollView {
                 }
             }
         });
+
+        mPhotoGallery.setOnAddClickListener(new PhotoGallery.OnAddClickListener() {
+            @Override
+            public void onAddClick(int mode) {
+                if (mEventListener != null) {
+                    mEventListener.onAddPhotoClick(mode);
+                }
+            }
+        });
     }
 
     public void setEventListener(EventListener listener) {
@@ -119,9 +130,11 @@ public class PhotoView extends ScrollView {
 
     public void enterEditorMode() {
         mPhotoIntro.enterEditorMode();
+        mPhotoGallery.enterEditorMode();
     }
 
     public void exitEditorMode() {
         mPhotoIntro.exitEditorMode();
+        mPhotoGallery.exitEditorMode();
     }
 }
