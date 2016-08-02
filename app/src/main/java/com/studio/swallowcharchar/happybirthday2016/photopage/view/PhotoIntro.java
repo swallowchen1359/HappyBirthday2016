@@ -120,6 +120,10 @@ public class PhotoIntro extends LinearLayout {
     public void setDate(int year, int month, int day) {
         mTimeTextView.setText(year + "/" + month + "/" + day);
     }
+    
+    public void setNum(int num) {
+        mNumTextView.setText(num);
+    }
 
     public void setOnEditorClickListener(OnEditorClickListener listener) {
         mOnEditorClickListener = listener;

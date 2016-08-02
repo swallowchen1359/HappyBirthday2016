@@ -87,6 +87,7 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
     public void onLoadDone() {
         mPhotoView.setTags(mModel.getPhotoTagList(mAlbumOnClickPosition));
         mPhotoView.setCover(mModel.getPhotoCoverBitmap(mAlbumOnClickPosition));
+        mPhotoView.setNum(mModel.getPhotoCount(mAlbumOnClickPosition));
         /**
          * Trigger PhotoView to set photo after cover setting. The model will keep returning
          * bitmap by callback function onBitmapCreateDone

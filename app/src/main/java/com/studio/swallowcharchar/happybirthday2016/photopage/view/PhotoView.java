@@ -104,6 +104,10 @@ public class PhotoView extends ScrollView {
     public void setDate(int year, int month, int day) {
         mPhotoIntro.setDate(year, month, day);
     }
+    
+    public void setNum(int num) {
+        mPhotoIntro.setNum(num);
+    }
 
     public void setPhoto(Bitmap bitmap) {
         mPhotoGallery.setGallery(bitmap);

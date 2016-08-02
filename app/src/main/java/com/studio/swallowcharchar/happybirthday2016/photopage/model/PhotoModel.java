@@ -184,6 +184,18 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         }
         return mPhotoTagList;
     }
+    
+    public int getPhotoCount(int position) {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+
+        /** Get the clicked album in AlbumFragment */
+        Album album = mAlbumArrayList.get(position);
+        /** Get the photoIds of picked album */
+        int photoIds[] = album.getPhotoResIds();
+        return photoIds.length;
+    }
 
     public void setTaskCallbacks(TaskCallbacks callbacks) {
         mTaskCallbacks = callbacks;
