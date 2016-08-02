@@ -15,7 +15,7 @@ import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryD
 /**
  * Created by Swallow on 7/18/16.
  */
-public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoModel.TaskCallbacks {
+public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoModel.TaskCallbacks, PhotoGalleryDialogView.EventListener {
 
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
 
@@ -72,5 +72,16 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     @Override
     public void onBitmapCreateDone(Bitmap bitmap) {
         mPhotoGalleryDialogView.setPhoto(bitmap);
+    }
+    
+    /*************************** PhotoGalleryDialoView.EventListener *****************************/
+    @Override
+    public void onImageClick() {
+        
+    }
+    
+    @Override
+    public void onConfirmClick() {
+        
     }
 }
