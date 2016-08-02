@@ -46,6 +46,7 @@
                 android:background="@drawable/rect_top_border"/>
 
             <LinearLayout
+                android:id="@+id/photo_dialog_gallery_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"

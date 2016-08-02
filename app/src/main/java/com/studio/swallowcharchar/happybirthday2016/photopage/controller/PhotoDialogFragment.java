@@ -14,7 +14,7 @@ import com.studio.swallowcharchar.happybirthday2016.widget.DialogView;
 /**
  * Created by Swallow on 7/14/16.
  */
-public class PhotoDialogFragment extends DialogFragment implements PhotoDialogView.OnBackgroundClickListener {
+public class PhotoDialogFragment extends DialogFragment implements PhotoDialogView.OnBackgroundClickListener, PhotoGalleryDialogView.EventListener {
 
     public static final int STRING_BUNDLE_DIALOG_STYLE_RES_ID = R.string.bundle_dialog_style;
 
@@ -70,5 +70,15 @@ public class PhotoDialogFragment extends DialogFragment implements PhotoDialogVi
     @Override
     public void onBackgroundClick() {
         getActivity().onBackPressed();
+    }
+    
+    @Override
+    public void onImageClick() {
+        
+    }
+    
+    @Override
+    public void onConfirmClick() {
+        
     }
 }

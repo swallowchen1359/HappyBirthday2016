@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.RelativeLayout;
 import android.widget.ImageView;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
@@ -26,14 +27,62 @@ public class PhotoGallery extends ViewGroup {
             super(width, height);
         }
     }
+    
+    public class ImageContainer extends RelativeLayout {
+        
+        private ImageView imageView;
+        private RelativeLayout mask;
+        
+        private boolean isPicked;
+        
+        public ImageContainer(Context context) {
+            this(context, null);
+        }
+        
+        public ImageContainer(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            isPicked = false;
+
+            imageView = new ImageView(context);
+            imageView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            imageView.setScaleType(ImageView.setScaleType.CENTER_CROP);
+
+            maks = new RelativeLayout(context);
+            mask.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+            addView(imageView);
+            addView(mask);
+        }
+        
+        public void setImageBitmap(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+        
+        public void setMaskColor(int colorId) {
+            mask.setBackgroundColor(colorId);
+        }
+        
+        public void setPicked(boolean picked) {
+            isPicked = picked;
+        }
+        
+        public boolean isPicked() {
+            return isPicked;
+        }
+    }
 
     public interface OnAddClickListener {
         void onAddClick(int mode);
+    }
+    
+    public interface OnImageClickListener {
+        void onImageClick();
     }
 
     private int mPhotoSize;
     private int mCurrentMode;
     private OnAddClickListener mOnAddClickListener;
+    private OnImageClickListener mOnImageClickListener;
 
     public PhotoGallery(Context context) {
         this(context, null);
@@ -129,14 +178,38 @@ public class PhotoGallery extends ViewGroup {
     public void setOnAddClickListener(OnAddClickListener listener) {
         mOnAddClickListener = listener;
     }
+    
+    public void setOnImageClickListener(OnImageClickListener listener) {
+        mOnImageClickListener = listener;
+    }
 
     private void createImageView(Bitmap bitmap) {
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageBitmap(bitmap);
+        ImageContainer imageContainer = new ImageContainer(getContext());
+        imageContainer.setImageBitmap(bitmap);
         PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(mPhotoSize, mPhotoSize);
         layoutParams.setMargins(5 ,5, 5, 5);
-        imageView.setLayoutParams(layoutParams);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        imageContainer.setLayoutParams(layoutParams);
+        /** For editor mode use */
+        imageContainer.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCurrentMode == PhotoView.MODE_EDITOR) {
+                    if (imageContainer.isPicked()) {
+                        imageContainer.setMaskColor(getResources.getColor(R.color.default_img_background));
+                        imageContainer.setPicked(false);
+                        if (mOnImageClickListener != null) {
+                            mOnImageClickListener.onImageClick();
+                        }
+                    } else {
+                        imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
+                        imageContainer.setPicked(true);
+                        if (mOnImageClickListener != null) {
+                            mOnImageClickListener.onImageClick();
+                        }
+                    }
+                }
+            }
+        });
         addView(imageView);
     }
 
@@ -162,6 +235,7 @@ public class PhotoGallery extends ViewGroup {
         addView(imageView, 0);
     }
 
+    /** For editor mode use */
     private void removeAddImageView() {
         if (mCurrentMode == PhotoView.MODE_NORMAL) {
             return;
