@@ -262,6 +262,24 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return null;
     }
 
+
+    /**
+     * The function is used to create Photo Object according to index mapping to cursor
+     * The function will keep send Bitmap to callback function onBitmapCreateDone
+     * @return Bitmap according to Cursor
+     * */
+    public Photo getPhotoFromCursorByIndex(int index) {
+        if (mImageMediaCursor == null) {
+            return null;
+        }
+        /** Move index of Cursor to @param index */
+        
+        /** Create Photo Object and put it into Photo database and Album database */
+        
+        /** Remember to search to avoid duplicate Photo item in database */
+        return null;
+    }
+
     private Bitmap getBitmapFromCursor(String fileStr) {
         if (mImageMediaCursor == null) {
             return null;

@@ -196,6 +196,8 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
             photoGalleryDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
                 @Override
                 public void onDialogFinish(Object obj) {
+                    LinkedList<Photo> photoLinkedList = (LinkedList<Photo>) obj;
+                    mModel.initModel();
                 }
             });
         }

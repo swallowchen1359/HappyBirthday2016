@@ -97,6 +97,22 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     
     @Override
     public void onConfirmClick() {
+        /** When confirm click, using PhotoModel to create a new photo object and save */
+        if (mModel == null) {
+            return;
+        }
+        /** Photo LinkedList is used for PhotoFragment to update photoGallery */
+        LinkedList<Photo> photoLinkedList = new LinkedList<>();
+
+        for (int i = 0; i < mPickedImageIndexLinkedList.size(); i++) {
+            Integer index = mPickedImageIndexLinkedList.get(i);
+            Photo photo = mModel.getPhotoFromCursorByIndex(index);
+            photoLinkedList.add(photo);
+        }
         
+        if (listener != null) {
+            listener.onDialogFinish(photoLinkedList);
+        }
+        getActivity().onBackPressed();
     }
 }
