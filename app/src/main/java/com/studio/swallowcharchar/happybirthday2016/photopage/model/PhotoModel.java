@@ -210,7 +210,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
     
     public int getPhotoCount(int position) {
         if (mContext == null || mAlbumArrayList == null) {
-            return null;
+            return -1;
         }
 
         /** Get the clicked album in AlbumFragment */

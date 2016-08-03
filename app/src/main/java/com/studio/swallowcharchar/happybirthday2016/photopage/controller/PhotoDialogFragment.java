@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
+import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView;
 import com.studio.swallowcharchar.happybirthday2016.widget.DialogFragment;
 import com.studio.swallowcharchar.happybirthday2016.widget.DialogView;
 

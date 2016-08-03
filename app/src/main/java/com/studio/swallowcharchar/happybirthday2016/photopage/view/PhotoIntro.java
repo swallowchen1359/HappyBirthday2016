@@ -122,7 +122,7 @@ public class PhotoIntro extends LinearLayout {
     }
     
     public void setNum(int num) {
-        mNumTextView.setText(num);
+        mNumTextView.setText(String.valueOf(num));
     }
 
     public void setOnEditorClickListener(OnEditorClickListener listener) {

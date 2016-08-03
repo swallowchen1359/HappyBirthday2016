@@ -1,14 +1,13 @@
 package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.RelativeLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 
@@ -44,11 +43,11 @@ public class PhotoGallery extends ViewGroup {
             isPicked = false;
 
             imageView = new ImageView(context);
-            imageView.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            imageView.setScaleType(ImageView.setScaleType.CENTER_CROP);
+            imageView.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-            maks = new RelativeLayout(context);
-            mask.setLayoutParams(new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            mask = new RelativeLayout(context);
+            mask.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
             addView(imageView);
             addView(mask);
@@ -184,7 +183,7 @@ public class PhotoGallery extends ViewGroup {
     }
 
     private void createImageView(Bitmap bitmap) {
-        ImageContainer imageContainer = new ImageContainer(getContext());
+        final ImageContainer imageContainer = new ImageContainer(getContext());
         imageContainer.setImageBitmap(bitmap);
         PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(mPhotoSize, mPhotoSize);
         layoutParams.setMargins(5 ,5, 5, 5);
@@ -195,7 +194,7 @@ public class PhotoGallery extends ViewGroup {
             public void onClick(View v) {
                 if (mCurrentMode == PhotoView.MODE_EDITOR) {
                     if (imageContainer.isPicked()) {
-                        imageContainer.setMaskColor(getResources.getColor(R.color.default_img_background));
+                        imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
                         imageContainer.setPicked(false);
                         if (mOnImageClickListener != null) {
                             mOnImageClickListener.onImageClick();
@@ -210,7 +209,7 @@ public class PhotoGallery extends ViewGroup {
                 }
             }
         });
-        addView(imageView);
+        addView(imageContainer);
     }
 
     /** For editor mode use */

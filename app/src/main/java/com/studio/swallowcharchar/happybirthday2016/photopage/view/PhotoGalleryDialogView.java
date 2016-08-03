@@ -3,6 +3,8 @@ package com.studio.swallowcharchar.happybirthday2016.photopage.view;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 
