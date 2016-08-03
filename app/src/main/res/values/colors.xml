@@ -11,4 +11,7 @@
 
     <color name="text_card_function">#FF9FA5AF</color>
     <color name="default_img_background">#FF9FA5AF</color>
+
+    <color name="default_picked_image_mask_color">#33FFFFFF</color>
+    <color name="default_image_mask_color">#00FFFFFF</color>
 </resources>

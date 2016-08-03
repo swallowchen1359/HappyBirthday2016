@@ -21,6 +21,9 @@ public class PhotoGalleryDialogView extends PhotoDialogView {
     private static final int VIEW_GALLERY_RES_ID = R.id.photo_dialog_gallery;
     private static final int VIEW_CONFIRM_RES_ID = R.id.photo_dialog_gallery_confirm;
 
+    public static final int MODE_NORMAL = 0x0;
+    public static final int MODE_EDITOR = 0x1;
+
     private PhotoGallery mPhotoGallery;
     private LinearLayout mConfirmButton;
     
@@ -64,6 +67,14 @@ public class PhotoGalleryDialogView extends PhotoDialogView {
 
     public void setPhoto(Bitmap bitmap) {
         mPhotoGallery.setGallery(bitmap);
+    }
+
+    public void setEditorMode(int mode) {
+        mPhotoGallery.setEditorMode(mode);
+    }
+
+    public void setEventListener(EventListener listener) {
+        mEventListener = listener;
     }
     
 }

@@ -225,61 +225,6 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return photoIds.length;
     }
 
-    /**
-     * The function is used to find the availabe picture in the device.
-     * The function will keep send Bitmap to callback function onBitmapCreateDone
-     * @return Bitmap according to Cursor
-     * */
-    public Bitmap getAvailableBitmap() {
-        if (mImageMediaCursor == null) {
-            return null;
-        }
-        for (mImageMediaCursor.moveToFirst(); !mImageMediaCursor.isAfterLast() && !mImageMediaCursor.isClosed();mImageMediaCursor.moveToNext()) {
-            File file = new File(mImageMediaCursor.getString(IDX_MEDIA_EXTERNAL_DATA));
-            Uri imgUri = Uri.fromFile(file);
-            new AsyncTask<Uri, Void, Bitmap>() {
-                @Override
-                protected Bitmap doInBackground(Uri... params) {
-                    Bitmap bitmap = null;
-                    try {
-                        Uri uri = params[0];
-                        bitmap = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), uri);
-                        bitmap = ImageUtility.resizeBitmap(bitmap, 200, 200);
-                    } catch(IOException e) {
-                        e.printStackTrace();
-                    }
-                    return bitmap;
-                }
-
-                @Override
-                protected void onPostExecute(Bitmap bitmap) {
-                    if (mTaskCallbacks != null) {
-                        mTaskCallbacks.onBitmapCreateDone(bitmap);
-                    }
-                }
-            }.execute(imgUri);
-        }
-        return null;
-    }
-
-
-    /**
-     * The function is used to create Photo Object according to index mapping to cursor
-     * The function will keep send Bitmap to callback function onBitmapCreateDone
-     * @return Bitmap according to Cursor
-     * */
-    public Photo getPhotoFromCursorByIndex(int index) {
-        if (mImageMediaCursor == null) {
-            return null;
-        }
-        /** Move index of Cursor to @param index */
-        
-        /** Create Photo Object and put it into Photo database and Album database */
-        
-        /** Remember to search to avoid duplicate Photo item in database */
-        return null;
-    }
-
     private Bitmap getBitmapFromCursor(String fileStr) {
         if (mImageMediaCursor == null) {
             return null;

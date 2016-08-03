@@ -72,12 +72,12 @@ public class PhotoDialogFragment extends DialogFragment implements PhotoDialogVi
     public void onBackgroundClick() {
         getActivity().onBackPressed();
     }
-    
+
     @Override
-    public void onImageClick() {
-        
+    public void onImageClick(boolean picked, int index) {
+
     }
-    
+
     @Override
     public void onConfirmClick() {
         

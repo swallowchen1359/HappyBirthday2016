@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -164,6 +165,10 @@ public class PhotoGallery extends ViewGroup {
         createImageView(bitmap);
     }
 
+    public void setEditorMode(int mode) {
+        mCurrentMode = mode;
+    }
+
     public void enterEditorMode() {
         mCurrentMode = PhotoView.MODE_EDITOR;
         createAddImageView();
@@ -189,19 +194,20 @@ public class PhotoGallery extends ViewGroup {
         PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(mPhotoSize, mPhotoSize);
         layoutParams.setMargins(5 ,5, 5, 5);
         imageContainer.setLayoutParams(layoutParams);
-        /** For editor mode use */
+        /** For photoeditor mode use */
         imageContainer.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mCurrentMode == PhotoView.MODE_EDITOR) {
+                if (mCurrentMode == PhotoView.MODE_EDITOR || mCurrentMode == PhotoGalleryDialogView.MODE_EDITOR) {
+                    Log.d("ImageContainer", "OnClick");
                     if (imageContainer.isPicked()) {
-                        imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
+                        imageContainer.setMaskColor(getResources().getColor(R.color.default_image_mask_color));
                         imageContainer.setPicked(false);
                         if (mOnImageClickListener != null) {
                             mOnImageClickListener.onImageClick(false, index);
                         }
                     } else {
-                        imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
+                        imageContainer.setMaskColor(getResources().getColor(R.color.default_picked_image_mask_color));
                         imageContainer.setPicked(true);
                         if (mOnImageClickListener != null) {
                             mOnImageClickListener.onImageClick(true, index);

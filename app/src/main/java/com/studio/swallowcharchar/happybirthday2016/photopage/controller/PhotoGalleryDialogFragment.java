@@ -9,17 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
-import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoModel;
+import com.studio.swallowcharchar.happybirthday2016.database.Photo;
+import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoDialogModel;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView;
+
+import java.util.LinkedList;
 
 /**
  * Created by Swallow on 7/18/16.
  */
-public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoModel.TaskCallbacks, PhotoGalleryDialogView.EventListener {
+public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoDialogModel.TaskCallbacks, PhotoGalleryDialogView.EventListener {
 
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
 
-    private PhotoModel mModel;
+    private PhotoDialogModel mModel;
     private PhotoGalleryDialogView mPhotoGalleryDialogView;
     private int mAlbumOnClickPosition;
     private LinkedList<Integer> mPickedImageIndexLinkedList;
@@ -37,6 +40,8 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
 
         /** PhotoModel should initialize when onAttach */
         if (mModel != null && mPhotoGalleryDialogView != null) {
+            mPhotoGalleryDialogView.setEditorMode(PhotoGalleryDialogView.MODE_EDITOR);
+            mPhotoGalleryDialogView.setEventListener(this);
             /** After create and load done, callback will be awaken to do some jobs */
             mModel.createPhotoLoader();
         } else {
@@ -48,7 +53,7 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mModel = new PhotoModel(activity);
+        mModel = new PhotoDialogModel(activity);
         mModel.setTaskCallbacks(this);
         /** After model init done (loading Json file), callback onInitModelDone will be awaken to do some jobs */
         mModel.initModel();
@@ -104,12 +109,15 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
         /** Photo LinkedList is used for PhotoFragment to update photoGallery */
         LinkedList<Photo> photoLinkedList = new LinkedList<>();
 
+        Log.d("mPickedImageLL", "size " + mPickedImageIndexLinkedList.size());
         for (int i = 0; i < mPickedImageIndexLinkedList.size(); i++) {
-            Integer index = mPickedImageIndexLinkedList.get(i);
+            int index = mPickedImageIndexLinkedList.get(i);
+            Log.d("index", "index " + index);
             Photo photo = mModel.getPhotoFromCursorByIndex(index);
             photoLinkedList.add(photo);
         }
-        
+
+        OnDialogFinishListener listener = getOnDialogFinishListener();
         if (listener != null) {
             listener.onDialogFinish(photoLinkedList);
         }

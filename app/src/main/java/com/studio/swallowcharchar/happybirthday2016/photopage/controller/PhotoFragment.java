@@ -11,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
+import com.studio.swallowcharchar.happybirthday2016.database.Photo;
 import com.studio.swallowcharchar.happybirthday2016.photopage.PhotoActivity;
 import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoModel;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogView;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView;
 import com.studio.swallowcharchar.happybirthday2016.widget.DialogFragment;
+
+import java.util.LinkedList;
 
 /**
  * A simple {@link Fragment} subclass.
