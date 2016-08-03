@@ -33,7 +33,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
      * -----------------------------------------------------------
      * * photoId      : Index for Album to identified photos.    *
      * * photoResName : Img file name, excluding path.           *
-     * * source       : 0: from mipmap, 1: internal 2: external. *
+     * * source       : 0: from mipmap, 1: external.             *
      * * title        : Title for photo.                         *
      * * description  : Description for photo.                   *
      * * tags         : Tags of photos (for future use).         *
@@ -207,7 +207,12 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         }
         return mPhotoTagList;
     }
-    
+
+    /**
+     * @param position is the position according to AlbumView
+     * {@link com.studio.swallowcharchar.happybirthday2016.database.Photo}
+     * @return Integer result of photo num
+     * */
     public int getPhotoCount(int position) {
         if (mContext == null || mAlbumArrayList == null) {
             return -1;
@@ -220,6 +225,11 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return photoIds.length;
     }
 
+    /**
+     * The function is used to find the availabe picture in the device.
+     * The function will keep send Bitmap to callback function onBitmapCreateDone
+     * @return Bitmap according to Cursor
+     * */
     public Bitmap getAvailableBitmap() {
         if (mImageMediaCursor == null) {
             return null;

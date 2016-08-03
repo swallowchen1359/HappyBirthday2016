@@ -75,7 +75,7 @@ public class PhotoGallery extends ViewGroup {
     }
     
     public interface OnImageClickListener {
-        void onImageClick();
+        void onImageClick(boolean picked, int index);
     }
 
     private int mPhotoSize;
@@ -184,6 +184,7 @@ public class PhotoGallery extends ViewGroup {
 
     private void createImageView(Bitmap bitmap) {
         final ImageContainer imageContainer = new ImageContainer(getContext());
+        final int index = getChildCount();
         imageContainer.setImageBitmap(bitmap);
         PhotoGallery.LayoutParams layoutParams = new PhotoGallery.LayoutParams(mPhotoSize, mPhotoSize);
         layoutParams.setMargins(5 ,5, 5, 5);
@@ -197,13 +198,13 @@ public class PhotoGallery extends ViewGroup {
                         imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
                         imageContainer.setPicked(false);
                         if (mOnImageClickListener != null) {
-                            mOnImageClickListener.onImageClick();
+                            mOnImageClickListener.onImageClick(false, index);
                         }
                     } else {
                         imageContainer.setMaskColor(getResources().getColor(R.color.default_img_background));
                         imageContainer.setPicked(true);
                         if (mOnImageClickListener != null) {
-                            mOnImageClickListener.onImageClick();
+                            mOnImageClickListener.onImageClick(true, index);
                         }
                     }
                 }

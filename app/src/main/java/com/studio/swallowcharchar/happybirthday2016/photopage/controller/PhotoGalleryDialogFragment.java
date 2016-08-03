@@ -22,6 +22,11 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     private PhotoModel mModel;
     private PhotoGalleryDialogView mPhotoGalleryDialogView;
     private int mAlbumOnClickPosition;
+    private LinkedList<Integer> mPickedImageIndexLinkedList;
+    
+    public PhotoGalleryDialogFragment() {
+        mPickedImageIndexLinkedList = new LinkedList<>();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -76,8 +81,18 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     
     /*************************** PhotoGalleryDialoView.EventListener *****************************/
     @Override
-    public void onImageClick() {
-        
+    public void onImageClick(boolean picked, int index) {
+        if (picked) {
+            mPickedImageIndexLinkedList.add(index);
+        } else {
+            /** find and delete the index */
+            if (mPickedImageIndexLinkedList.contains(index)) {
+                int linkedListIndex = mPickedImageIndexLinkedList.indexOf(index);
+                mPickedImageIndexLinkedList.remove(linkedListIndex);
+            } else {
+                /** the situation should not happen */
+            }
+        }
     }
     
     @Override

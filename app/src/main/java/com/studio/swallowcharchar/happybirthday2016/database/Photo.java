@@ -9,7 +9,7 @@ public class Photo {
      * -----------------------------------------------------------
      * * photoId      : Index for Album to identified photos.    *
      * * photoResName : Img file name, excluding path.           *
-     * * source       : 0: from mipmap, 1: internal 2: external. *
+     * * source       : 0: from mipmap, 1: external.             *
      * * title        : Title for photo.                         *
      * * description  : Description for photo.                   *
      * * tags         : Tags of photos (for future use).         *

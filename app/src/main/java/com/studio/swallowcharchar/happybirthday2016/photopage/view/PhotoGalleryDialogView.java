@@ -14,7 +14,7 @@ import com.studio.swallowcharchar.happybirthday2016.R;
 public class PhotoGalleryDialogView extends PhotoDialogView {
     
     public interface EventListener {
-        void onImageClick();
+        void onImageClick(boolean picked, int index);
         void onConfirmClick();
     }
 
@@ -42,9 +42,9 @@ public class PhotoGalleryDialogView extends PhotoDialogView {
         }
         mPhotoGallery.setOnImageClickListener(new PhotoGallery.OnImageClickListener() {
             @Override
-            public void onImageClick() {
+            public void onImageClick(boolean picked, int index) {
                 if (mEventListener != null) {
-                    mEventListener.onImageClick();
+                    mEventListener.onImageClick(picked, index);
                 }
             }
         });
