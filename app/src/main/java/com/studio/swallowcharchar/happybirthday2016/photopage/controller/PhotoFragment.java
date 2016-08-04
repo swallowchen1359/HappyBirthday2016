@@ -18,6 +18,7 @@ import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoDialogVi
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoView;
 import com.studio.swallowcharchar.happybirthday2016.widget.DialogFragment;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**

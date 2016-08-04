@@ -6,6 +6,8 @@ import com.studio.swallowcharchar.happybirthday2016.R;
 
 import com.google.gson.Gson;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,9 +33,9 @@ public class Database {
     };
     
     private static final String FILE_JSON_STRING_s[] = {
-        0,
-        0,
-        0,
+        "",
+        "",
+        "",
         "database_album.json",      /** internal file, not raw file */
         "database_photo.json"       /** internal file, not raw file */
     };
@@ -51,9 +53,17 @@ public class Database {
             case JSON_PHOTO:
                 return load(Photo[].class, context.getResources().openRawResource(RAW_JSON_RES_ID_s[index]));
             case JSON_ALBUM_INTERNAL:
-                return load(Album[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
+                try {
+                    return load(Album[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             case JSON_PHOTO_INTERNAL:
-                return load(Photo[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
+                try {
+                    return load(Photo[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             default:
                 return null;
         }
@@ -62,12 +72,13 @@ public class Database {
     /**
      * writeJson can only write to internal storage
      */
-    public void writeJson(Context context, int index, ArrayList<T> arrayList) {
+    public void writeJson(Context context, int index, ArrayList arrayList) {
         FileOutputStream fos;
         switch (index) {
             case JSON_ALBUM_INTERNAL:
             case JSON_PHOTO_INTERNAL:
-                return write(FILE_JSON_STRING_s[index], arrayList.toArray());
+                write(context, FILE_JSON_STRING_s[index], arrayList.toArray());
+                return;
             case JSON_ALBUM:
             case JSON_PHOTO:
             default:
@@ -107,10 +118,10 @@ public class Database {
         return new ArrayList<T>(Arrays.asList(tArray));
     }
     
-    private <T> void write(String fileName, T[] array) {
+    private <T> void write(Context context, String fileName, T[] array) {
         FileOutputStream fos;
         try {
-            fos = wContext.openFileOutput(filename, Context.MODE_PRIVATE);
+            fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             fos.write(new Gson().toJson(array).getBytes());
             fos.close();
         } catch (IOException e) {

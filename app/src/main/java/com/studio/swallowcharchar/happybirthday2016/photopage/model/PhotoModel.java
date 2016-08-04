@@ -94,13 +94,13 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
     public boolean initModel() {
         ArrayList<Album> rawAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
         ArrayList<Photo> rawPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);
-        ArrayList<Album> internalAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM_INTERNAL);
-        ArrayList<Photo> internalPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO_INTERNAL);
+//        ArrayList<Album> internalAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM_INTERNAL);
+//        ArrayList<Photo> internalPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO_INTERNAL);
         
         mAlbumArrayList = new ArrayList<Album>(rawAlbumArrayList);
-        mAlbumArrayList.addAll(internalAlbumArrayList);
+//        mAlbumArrayList.addAll(internalAlbumArrayList);
         mPhotoArrayList = new ArrayList<Photo>(rawPhotoArrayList);
-        mPhotoArrayList.addAll(internalPhotoArrayList);
+//        mPhotoArrayList.addAll(internalPhotoArrayList);
         /** Awake Callback (In PhotoFragment) */
         if (mTaskCallbacks != null) {
             mTaskCallbacks.onInitModelDone();
