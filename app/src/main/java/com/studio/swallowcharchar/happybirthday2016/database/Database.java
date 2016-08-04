@@ -19,24 +19,59 @@ import java.util.Arrays;
 public class Database {
     public static final int JSON_ALBUM = 0x1;
     public static final int JSON_PHOTO = 0x2;
+    public static final int JSON_ALBUM_INTERNAL = 0x3;
+    public static final int JSON_PHOTO_INTERNAL = 0x4;
 
     private static final int RAW_JSON_RES_ID_s[] = {
         0,
         R.raw.database_album,
-        R.raw.database_photo
+        R.raw.database_photo,
+        0,
+        0
+    };
+    
+    private static final String FILE_JSON_STRING_s[] = {
+        0,
+        0,
+        0,
+        "database_album.json",      /** internal file, not raw file */
+        "database_photo.json"       /** internal file, not raw file */
     };
 
     public Database() {
     }
 
+    /**
+     * loadJson can load both raw file and file in internal storage
+     */
     public ArrayList loadJson(Context context, int index) {
         switch (index) {
             case JSON_ALBUM:
                 return load(Album[].class, context.getResources().openRawResource(RAW_JSON_RES_ID_s[index]));
             case JSON_PHOTO:
                 return load(Photo[].class, context.getResources().openRawResource(RAW_JSON_RES_ID_s[index]));
+            case JSON_ALBUM_INTERNAL:
+                return load(Album[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
+            case JSON_PHOTO_INTERNAL:
+                return load(Photo[].class, context.openFileInput(FILE_JSON_STRING_s[index]));
             default:
                 return null;
+        }
+    }
+
+    /**
+     * writeJson can only write to internal storage
+     */
+    public void writeJson(Context context, int index, ArrayList<T> arrayList) {
+        FileOutputStream fos;
+        switch (index) {
+            case JSON_ALBUM_INTERNAL:
+            case JSON_PHOTO_INTERNAL:
+                return write(FILE_JSON_STRING_s[index], arrayList.toArray());
+            case JSON_ALBUM:
+            case JSON_PHOTO:
+            default:
+                return;
         }
     }
 
@@ -70,5 +105,16 @@ public class Database {
 
         T[] tArray = new Gson().fromJson(builder.toString(), classOfT);
         return new ArrayList<T>(Arrays.asList(tArray));
+    }
+    
+    private <T> void write(String fileName, T[] array) {
+        FileOutputStream fos;
+        try {
+            fos = wContext.openFileOutput(filename, Context.MODE_PRIVATE);
+            fos.write(new Gson().toJson(array).getBytes());
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

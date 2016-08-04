@@ -199,7 +199,11 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
             photoGalleryDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
                 @Override
                 public void onDialogFinish(Object obj) {
-                    LinkedList<Photo> photoLinkedList = (LinkedList<Photo>) obj;
+                    /** Get the picked photo from PhotoGalleryDialogFragment */
+                    ArrayList<Photo> photoArrayList = (ArrayList<Photo>) obj;
+                    /** Save the picked image into Database by model */
+                    mModel.addPhotoToDatabase(photoArrayList);
+                    /** Re-init model (reload database) to reload the images */
                     mModel.initModel();
                 }
             });

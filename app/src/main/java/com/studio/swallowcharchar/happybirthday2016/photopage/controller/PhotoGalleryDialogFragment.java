@@ -14,6 +14,7 @@ import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoDialogM
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView;
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * Created by Swallow on 7/18/16.
@@ -107,7 +108,7 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
             return;
         }
         /** Photo LinkedList is used for PhotoFragment to update photoGallery */
-        LinkedList<Photo> photoLinkedList = new LinkedList<>();
+        ArrayList<Photo> photoLinkedList = new ArrayList<>();
 
         Log.d("mPickedImageLL", "size " + mPickedImageIndexLinkedList.size());
         for (int i = 0; i < mPickedImageIndexLinkedList.size(); i++) {

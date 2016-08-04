@@ -87,9 +87,20 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         mPhotoTagList = new LinkedList<>();
     }
 
+    /**
+     * initModel will load both Album and Photo from Database, once done, the 
+     * callbacks will be awaken for PhotoFragment to do things
+     */
     public boolean initModel() {
-        mAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
-        mPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);
+        ArrayList<Album> rawAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM);
+        ArrayList<Photo> rawPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO);
+        ArrayList<Album> internalAlbumArrayList = new Database().loadJson(mContext, Database.JSON_ALBUM_INTERNAL);
+        ArrayList<Photo> internalPhotoArrayList = new Database().loadJson(mContext, Database.JSON_PHOTO_INTERNAL);
+        
+        mAlbumArrayList = new ArrayList<Album>(rawAlbumArrayList);
+        mAlbumArrayList.addAll(internalAlbumArrayList);
+        mPhotoArrayList = new ArrayList<Photo>(rawPhotoArrayList);
+        mPhotoArrayList.addAll(internalPhotoArrayList);
         /** Awake Callback (In PhotoFragment) */
         if (mTaskCallbacks != null) {
             mTaskCallbacks.onInitModelDone();
@@ -97,15 +108,32 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return mPhotoArrayList != null ;
     }
 
+    /**
+     * @param photoArrayList is the Photo objects to be recording into internal 
+     * storage
+     * addPhotoToDatabase will add the photos into .json file by Database API
+     */
+    public void addPhotoToDatabase(ArrayList photoArrayList) {
+        new Database().writeJson(mContext, Database.JSON_PHOTO_INTERNAL, photoArrayList);
+    }
+
+    /**
+     * The Controller (Fragment) implements the models should set callbacks to
+     * wait for awaken
+     */
     public void setTaskCallbacks(TaskCallbacks callbacks) {
         mTaskCallbacks = callbacks;
     }
 
+    /**
+     * createPhotoLoader will create a loader to start load external storage to
+     * find out all available pictures
+     */
     public void createPhotoLoader() {
         if (mContext == null) {
             return;
         }
-        ((Activity)mContext).getLoaderManager().initLoader(URL_LOADER, null, this);
+        ((Activity) mContext).getLoaderManager().initLoader(URL_LOADER, null, this);
     }
 
     /**
