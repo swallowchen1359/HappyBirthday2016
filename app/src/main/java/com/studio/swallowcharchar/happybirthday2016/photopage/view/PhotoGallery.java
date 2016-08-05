@@ -55,6 +55,10 @@ public class PhotoGallery extends ViewGroup {
         }
         
         public void setImageBitmap(Bitmap bitmap) {
+            if (bitmap == null) {
+                imageView.setBackgroundColor(getResources().getColor(R.color.default_img_background));
+                return;
+            }
             imageView.setImageBitmap(bitmap);
         }
         

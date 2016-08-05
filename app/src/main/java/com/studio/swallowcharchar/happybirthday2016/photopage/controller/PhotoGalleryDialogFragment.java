@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.studio.swallowcharchar.happybirthday2016.R;
 import com.studio.swallowcharchar.happybirthday2016.database.Photo;
-import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoDialogModel;
+import com.studio.swallowcharchar.happybirthday2016.photopage.model.PhotoGalleryDialogModel;
 import com.studio.swallowcharchar.happybirthday2016.photopage.view.PhotoGalleryDialogView;
 
 import java.util.LinkedList;
@@ -19,11 +19,11 @@ import java.util.ArrayList;
 /**
  * Created by Swallow on 7/18/16.
  */
-public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoDialogModel.TaskCallbacks, PhotoGalleryDialogView.EventListener {
+public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements PhotoGalleryDialogModel.TaskCallbacks, PhotoGalleryDialogView.EventListener {
 
     private static final int STRING_BUNDLE_ALBUM_CLICKED_POSITION_RES_ID = R.string.bundle_album_clicked_position;
 
-    private PhotoDialogModel mModel;
+    private PhotoGalleryDialogModel mModel;
     private PhotoGalleryDialogView mPhotoGalleryDialogView;
     private int mAlbumOnClickPosition;
     private LinkedList<Integer> mPickedImageIndexLinkedList;
@@ -54,7 +54,7 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        mModel = new PhotoDialogModel(activity);
+        mModel = new PhotoGalleryDialogModel(activity);
         mModel.setTaskCallbacks(this);
         /** After model init done (loading Json file), callback onInitModelDone will be awaken to do some jobs */
         mModel.initModel();

@@ -77,10 +77,6 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
         mModel.initModel();
     }
 
-    public int getCurrentMode() {
-        return mCurrentMode;
-    }
-
     /******************************* PhotoModel.TaskCallbacks ************************************/
     @Override
     public void onInitModelDone() {
@@ -92,6 +88,8 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
         mPhotoView.setTags(mModel.getPhotoTagList(mAlbumOnClickPosition));
         mPhotoView.setCover(mModel.getPhotoCoverBitmap(mAlbumOnClickPosition));
         mPhotoView.setNum(mModel.getPhotoCount(mAlbumOnClickPosition));
+        PhotoModel.PickedDate pickedDate = mModel.getPhotoTime(mAlbumOnClickPosition);
+        mPhotoView.setDate(pickedDate.getYear(), pickedDate.getMonth(), pickedDate.getDay());
         /**
          * Trigger PhotoView to set photo after cover setting. The model will keep returning
          * bitmap by callback function onBitmapCreateDone
@@ -176,7 +174,7 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
             photoTimeDialogFragment.setOnDialogFinishListener(new DialogFragment.OnDialogFinishListener() {
                 @Override
                 public void onDialogFinish(Object obj) {
-                    PhotoTimeDialogFragment.PickedDate pickedDate = (PhotoTimeDialogFragment.PickedDate) obj;
+                    PhotoModel.PickedDate pickedDate = (PhotoModel.PickedDate) obj;
                     mPhotoView.setDate(pickedDate.getYear(), pickedDate.getMonth(), pickedDate.getDay());
                 }
             });

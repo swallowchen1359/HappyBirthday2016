@@ -46,6 +46,30 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         void onBitmapCreateDone(Bitmap bitmap);
     }
 
+    public static class PickedDate {
+        private int mYear;
+        private int mMonth;
+        private int mDay;
+
+        public PickedDate(int year, int month, int day) {
+            mYear = year;
+            mMonth = month;
+            mDay = day;
+        }
+
+        public int getYear() {
+            return mYear;
+        }
+
+        public int getMonth() {
+            return mMonth;
+        }
+
+        public int getDay() {
+            return mDay;
+        }
+    }
+
     private static final int URL_LOADER = 0;
 
 
@@ -251,6 +275,18 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         /** Get the photoIds of picked album */
         int photoIds[] = album.getPhotoResIds();
         return photoIds.length;
+    }
+
+    public PickedDate getPhotoTime(int position) {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        Album album = mAlbumArrayList.get(position);
+        int time[] = album.getTime();
+        int year = time[0];
+        int month = time[1];
+        int day = time[2];
+        return new PickedDate(year, month, day);
     }
 
     private Bitmap getBitmapFromCursor(String fileStr) {

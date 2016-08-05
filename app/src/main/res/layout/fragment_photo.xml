@@ -87,8 +87,7 @@
                                 android:id="@+id/photo_intro_time_text_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="6pt"
-                                android:text="2016/07/08"/>
+                                android:textSize="6pt"/>
 
                         </LinearLayout>
 
@@ -131,8 +130,7 @@
                                 android:id="@+id/photo_intro_place_text_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="6pt"
-                                android:text="心之芳庭"/>
+                                android:textSize="6pt"/>
 
                         </LinearLayout>
 

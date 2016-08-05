@@ -26,7 +26,7 @@ import java.util.LinkedList;
 /**
  * Created by Swallow on 8/3/16.
  */
-public class PhotoDialogModel implements LoaderManager.LoaderCallbacks<Cursor> {
+public class PhotoGalleryDialogModel implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public interface TaskCallbacks {
         void onInitModelDone();
@@ -70,7 +70,7 @@ public class PhotoDialogModel implements LoaderManager.LoaderCallbacks<Cursor> {
      */
     private Cursor mImageMediaCursor;
 
-    public PhotoDialogModel(Context context) {
+    public PhotoGalleryDialogModel(Context context) {
         mContext = context;
         mPhotoTagList = new LinkedList<>();
     }

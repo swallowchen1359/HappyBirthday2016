@@ -74,6 +74,9 @@ public class ImageUtility {
     }
 
     public static Bitmap resizeBitmap(Bitmap bitmap, int reqWidth, int reqHeight) {
+        if (bitmap == null) {
+            return null;
+        }
         int bitmapHeight = bitmap.getHeight();
         int bitmapWidth = bitmap.getWidth();
         int scaledHeight, scaledWidth, cropStartX, cropStartY;
