@@ -21,7 +21,7 @@ import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlbumFragment extends Fragment implements AlbumModel.TaskCallbacks, AlbumView.OnCardClickListener {
+public class AlbumFragment extends Fragment implements AlbumModel.TaskCallbacks, AlbumView.OnCardClickListener, AlbumView.OnCardChangeListener {
     private static final int VIEW_RES_ID = R.layout.fragment_album;
     private static final int VIEW_ALBUM_RES_ID = R.id.album_view;
 
@@ -41,6 +41,7 @@ public class AlbumFragment extends Fragment implements AlbumModel.TaskCallbacks,
         mAlbumView = (AlbumView) mainView.findViewById(VIEW_ALBUM_RES_ID);
         if (mModel != null && mAlbumView != null) {
             mAlbumView.setOnCardClickListener(this);
+            mAlbumView.setOnCardChangeListener(this);
         } else {
             Log.d("AlbumFragment", "Model or View is null");
         }
@@ -81,8 +82,27 @@ public class AlbumFragment extends Fragment implements AlbumModel.TaskCallbacks,
     public void onBitmapCreateDone(AlbumModel.BitmapWithIndex bitmapWithIndex) {
         Bitmap bitmap = bitmapWithIndex.getBitmap();
         int index = bitmapWithIndex.getIndex();
-        mAlbumView.setAlbum(bitmap, mModel.getAlbumTitle(index), mModel.getAlbumDescription(index),
-                mModel.getAlbumPhotos(index), mModel.getAlbumPlace(index),
-                mModel.getAlbumTime(index), mModel.getAlbumTags(index));
+        int type = bitmapWithIndex.getType();
+        /**
+         * index < 0, for onCardChangeUsing
+         * */
+        if (type == AlbumModel.TYPE_CHG) {
+            mAlbumView.changeAlbumImage(index, bitmap);
+        } else {
+            Log.d("AlbumFragment", "onBitmapCreateDone " + index);
+            mAlbumView.setAlbum(index, bitmap, mModel.getAlbumTitle(index), mModel.getAlbumDescription(index),
+                    mModel.getAlbumPhotos(index), mModel.getAlbumPlace(index),
+                    mModel.getAlbumTime(index), mModel.getAlbumTags(index));
+        }
+    }
+
+    @Override
+    public void onAllBitmapCreateDone() {
+
+    }
+
+    @Override
+    public void onCardChange(int index) {
+        mModel.getAlbumRandomPhotoBitmap(index);
     }
 }

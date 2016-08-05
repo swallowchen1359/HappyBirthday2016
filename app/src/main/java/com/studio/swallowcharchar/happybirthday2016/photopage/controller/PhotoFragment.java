@@ -90,6 +90,7 @@ public class PhotoFragment extends Fragment implements PhotoModel.TaskCallbacks,
         mPhotoView.setNum(mModel.getPhotoCount(mAlbumOnClickPosition));
         PhotoModel.PickedDate pickedDate = mModel.getPhotoTime(mAlbumOnClickPosition);
         mPhotoView.setDate(pickedDate.getYear(), pickedDate.getMonth(), pickedDate.getDay());
+        mPhotoView.setPlace(mModel.getPhotoPlace(mAlbumOnClickPosition));
         /**
          * Trigger PhotoView to set photo after cover setting. The model will keep returning
          * bitmap by callback function onBitmapCreateDone

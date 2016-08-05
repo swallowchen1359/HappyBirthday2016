@@ -57,6 +57,13 @@
                     android:background="@color/default_img_background"
                     android:layout_marginRight="5dp"/>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_place_black_24dp"
+                    android:layout_marginRight="5dp"/>
+
                 <TextView
                     android:id="@+id/album_place"
                     android:layout_width="wrap_content"

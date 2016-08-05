@@ -11,6 +11,7 @@ import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 /**
  * Created by Swallow on 6/22/16.
@@ -21,15 +22,18 @@ public class AlbumModel {
         void onInitModelDone();
         void onLoadDone();
         void onBitmapCreateDone(BitmapWithIndex bitmap);
+        void onAllBitmapCreateDone();
     }
 
     public class BitmapWithIndex {
         private Bitmap bitmap;
         private int index;
+        private int type;
 
-        BitmapWithIndex(Bitmap bitmap, int index) {
+        BitmapWithIndex(Bitmap bitmap, int index, int type) {
             this.bitmap = bitmap;
             this.index = index;
+            this.type = type;
         }
 
         public Bitmap getBitmap() {
@@ -39,7 +43,14 @@ public class AlbumModel {
         public int getIndex() {
             return index;
         }
+
+        public int getType() {
+            return type;
+        }
     }
+
+    public static final int TYPE_ADD = 0x1;
+    public static final int TYPE_CHG = 0x2;
 
     private Context mContext;
 
@@ -106,6 +117,10 @@ public class AlbumModel {
 
     public void setTaskCallbacks(TaskCallbacks taskCallbacks) {
         mTaskCallbacks = taskCallbacks;
+    }
+
+    public int getAlbumCount() {
+        return mAlbumArrayList.size();
     }
 
     public LinkedList<Integer> getAlbumPictureList() {
@@ -227,6 +242,16 @@ public class AlbumModel {
         }
         return linkedList;
     }
+
+    public Bitmap getAlbumRandomPhotoBitmap(int index) {
+        Album albumObject = mAlbumArrayList.get(index);
+        int[] photoIds = albumObject.getPhotoResIds();
+        Random random = new Random();
+        int photoIndex = random.nextInt(photoIds.length);
+        int photoId = photoIds[photoIndex];
+        getPhotoPictureBitmap(index, photoId);
+        return null;
+    }
     /**
      * The function will keep send Bitmap to callback function onBitmapCreateDone
      * TODO: Using AsyncTask to return bitmap
@@ -260,7 +285,7 @@ public class AlbumModel {
                             int resId = mContext.getResources().getIdentifier(album.getAlbumResName(), "drawable", mContext.getPackageName());
                             bitmap = ImageUtility.decodeSampledBitmapFromResource(mContext.getResources(), resId, 900, 900);
                         }
-                        return new BitmapWithIndex(bitmap, index);
+                        return new BitmapWithIndex(bitmap, index, TYPE_ADD);
                     }
 
                     @Override
@@ -272,6 +297,63 @@ public class AlbumModel {
                 }.execute(albumObject);
             }
         }
+        if (mTaskCallbacks != null) {
+            mTaskCallbacks.onAllBitmapCreateDone();
+        }
+        return null;
+    }
+
+    /**
+     * @param position is the position according to AlbumView
+     * The function will keep send Bitmap to callback function onBitmapCreateDone
+     * TODO: Using AsyncTask to return bitmap
+     * @return The last bitmap
+     * */
+    public Bitmap getPhotoPictureBitmap(int position, int photoId) {
+        if (mContext == null || mPhotoArrayList == null || mAlbumArrayList == null) {
+            return null;
+        }
+
+        Photo photoObject = null;
+        final int index = position;
+        /** 2. Get Photo object from mPhotoArrayList by comparing photoId */
+        for (int j = 0; j < mPhotoArrayList.size(); j++) {
+            if (mPhotoArrayList.get(j).getPhotoId() == photoId) {
+                photoObject = mPhotoArrayList.get(j);
+                break;
+            }
+        }
+        /**
+         * 3. Create an AsyncTask to load the resource by photoResName
+         * */
+        if (photoObject != null) {
+            new AsyncTask<Photo, Void, BitmapWithIndex>() {
+
+                @Override
+                protected BitmapWithIndex doInBackground(Photo... params) {
+                    Photo photo = params[0];
+                    Bitmap bitmap = null;
+                    /**
+                     * Photo image may come from 3 places
+                     * if mipmap, directly get mipmap
+                     * else, get from cursor
+                     */
+                    if (photo.getSource() == Photo.SOURCE_DRAWABLE) {
+                        int resId = mContext.getResources().getIdentifier(photo.getPhotoResName(), "drawable", mContext.getPackageName());
+                        bitmap = ImageUtility.decodeSampledBitmapFromResource(mContext.getResources(), resId, 300, 300);
+                    }
+                    return new BitmapWithIndex(bitmap, index, TYPE_CHG);
+                }
+
+                @Override
+                protected void onPostExecute(BitmapWithIndex bitmapWithIndex) {
+                    if (mTaskCallbacks != null) {
+                        mTaskCallbacks.onBitmapCreateDone(bitmapWithIndex);
+                    }
+                }
+            }.execute(photoObject);
+        }
+
         return null;
     }
 

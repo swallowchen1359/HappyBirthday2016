@@ -124,6 +124,10 @@ public class PhotoView extends ScrollView {
         mPhotoGallery.setGallery(bitmap);
     }
 
+    public void setPlace(String place) {
+        mPhotoIntro.setPlace(place);
+    }
+
     public void setTags(LinkedList<String> tagStrs) {
         mPhotoTagArea.setTags(tagStrs);
     }

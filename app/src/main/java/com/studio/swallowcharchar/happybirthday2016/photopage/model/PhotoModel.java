@@ -289,6 +289,14 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         return new PickedDate(year, month, day);
     }
 
+    public String getPhotoPlace(int position) {
+        if (mContext == null || mAlbumArrayList == null) {
+            return null;
+        }
+        Album album = mAlbumArrayList.get(position);
+        return album.getPlace();
+    }
+
     private Bitmap getBitmapFromCursor(String fileStr) {
         if (mImageMediaCursor == null) {
             return null;

@@ -154,8 +154,8 @@
         "source"          : 0,
         "title"           : "2年紀念快樂",
         "description"     : "",
-        "photoResIds"     : [159, 152, 153, 154, 155, 156, 157, 158],
-        "place"           : "草屯",
+        "photoResIds"     : [159, 152],
+        "place"           : "你心裡",
         "time"            : [2016, 2, 11],
         "tags"            : []
     }
