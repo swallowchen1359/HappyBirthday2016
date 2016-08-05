@@ -16,7 +16,7 @@ public class Photo {
      * -----------------------------------------------------------
      */
 
-    public static final int SOURCE_MIPMAP = 0x0;
+    public static final int SOURCE_DRAWABLE = 0x0;
     public static final int SOURCE_INTERNAL = 0x1;
     public static final int SOURCE_EXTERNAL = 0x2;
 

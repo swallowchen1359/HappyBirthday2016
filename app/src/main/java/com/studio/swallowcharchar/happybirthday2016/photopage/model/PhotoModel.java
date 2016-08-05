@@ -202,7 +202,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
                          * if mipmap, directly get mipmap
                          * else, get from cursor
                          */
-                        if (photo.getSource() == Photo.SOURCE_MIPMAP) {
+                        if (photo.getSource() == Photo.SOURCE_DRAWABLE) {
                             int resId = mContext.getResources().getIdentifier(photo.getPhotoResName(), "drawable", mContext.getPackageName());
                             bitmap = ImageUtility.decodeSampledBitmapFromResource(mContext.getResources(), resId, 300, 300);
                         } else {
@@ -234,7 +234,7 @@ public class PhotoModel implements LoaderManager.LoaderCallbacks<Cursor> {
         }
         Album album = mAlbumArrayList.get(position);
         String albumResName = album.getAlbumResName();
-        if (album.getSource() == Album.SOURCE_MIPMAP) {
+        if (album.getSource() == Album.SOURCE_DRAWABLE) {
             int resId = mContext.getResources().getIdentifier(albumResName, "drawable", mContext.getPackageName());
             return BitmapFactory.decodeResource(mContext.getResources(), resId, null);
         } else {

@@ -2,6 +2,7 @@ package com.studio.swallowcharchar.happybirthday2016.albumpage.controller;
 
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -20,7 +21,7 @@ import com.studio.swallowcharchar.happybirthday2016.widget.ImageUtility;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AlbumFragment extends Fragment implements AlbumView.OnCardClickListener {
+public class AlbumFragment extends Fragment implements AlbumModel.TaskCallbacks, AlbumView.OnCardClickListener {
     private static final int VIEW_RES_ID = R.layout.fragment_album;
     private static final int VIEW_ALBUM_RES_ID = R.id.album_view;
 
@@ -39,12 +40,6 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
         View mainView = inflater.inflate(VIEW_RES_ID, container, false);
         mAlbumView = (AlbumView) mainView.findViewById(VIEW_ALBUM_RES_ID);
         if (mModel != null && mAlbumView != null) {
-            /**
-             * AlbumView.setAlbums(AlbumPictures, Titles, Descriptions)
-             * */
-            mAlbumView.setAlbums(mModel.getAlbumPictureList(), mModel.getAlbumTitleList(),
-                    mModel.getAlbumDescriptionList(), mModel.getAlbumPlaceList(),
-                    mModel.getAlbumTimeList(), mModel.getAlbumTagsList());
             mAlbumView.setOnCardClickListener(this);
         } else {
             Log.d("AlbumFragment", "Model or View is null");
@@ -57,6 +52,7 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
         super.onAttach(activity);
         Log.d("AlbumFragment", "onAttach");
         mModel = new AlbumModel(activity);
+        mModel.setTaskCallbacks(this);
         mModel.initModel();
         Log.d("AlbumFragment", "getImageRotation Test " + ImageUtility.getImageRotation(getResources(), 0));
     }
@@ -64,5 +60,29 @@ public class AlbumFragment extends Fragment implements AlbumView.OnCardClickList
     @Override
     public void onCardImageClick(int position, ImageView sharedImageView) {
         ((AlbumActivity) getActivity()).goActivity(PhotoActivity.class, sharedImageView, position);
+    }
+
+    /******************************* PhotoModel.TaskCallbacks ************************************/
+    @Override
+    public void onInitModelDone() {
+        /**
+         * After AlbumModel init model done, get album picture bitmaps, after bitmap ready,
+         * onBitmapCreateDone will be called
+         * */
+        mModel.getAlbumPictureBitmaps();
+    }
+
+    @Override
+    public void onLoadDone() {
+
+    }
+
+    @Override
+    public void onBitmapCreateDone(AlbumModel.BitmapWithIndex bitmapWithIndex) {
+        Bitmap bitmap = bitmapWithIndex.getBitmap();
+        int index = bitmapWithIndex.getIndex();
+        mAlbumView.setAlbum(bitmap, mModel.getAlbumTitle(index), mModel.getAlbumDescription(index),
+                mModel.getAlbumPhotos(index), mModel.getAlbumPlace(index),
+                mModel.getAlbumTime(index), mModel.getAlbumTags(index));
     }
 }
