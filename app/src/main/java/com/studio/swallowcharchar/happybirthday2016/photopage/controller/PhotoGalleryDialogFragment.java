@@ -104,24 +104,24 @@ public class PhotoGalleryDialogFragment extends PhotoDialogFragment implements P
     @Override
     public void onConfirmClick() {
         /** When confirm click, using PhotoModel to create a new photo object and save */
-        if (mModel == null) {
+        if (mModel == null || true) {
             return;
         }
-        /** Photo LinkedList is used for PhotoFragment to update photoGallery */
-        ArrayList<Photo> photoLinkedList = new ArrayList<>();
-
-        Log.d("mPickedImageLL", "size " + mPickedImageIndexLinkedList.size());
-        for (int i = 0; i < mPickedImageIndexLinkedList.size(); i++) {
-            int index = mPickedImageIndexLinkedList.get(i);
-            Log.d("index", "index " + index);
-            Photo photo = mModel.getPhotoFromCursorByIndex(index);
-            photoLinkedList.add(photo);
-        }
-
-        OnDialogFinishListener listener = getOnDialogFinishListener();
-        if (listener != null) {
-            listener.onDialogFinish(photoLinkedList);
-        }
-        getActivity().onBackPressed();
+//        /** Photo LinkedList is used for PhotoFragment to update photoGallery */
+//        ArrayList<Photo> photoLinkedList = new ArrayList<>();
+//
+//        Log.d("mPickedImageLL", "size " + mPickedImageIndexLinkedList.size());
+//        for (int i = 0; i < mPickedImageIndexLinkedList.size(); i++) {
+//            int index = mPickedImageIndexLinkedList.get(i);
+//            Log.d("index", "index " + index);
+//            Photo photo = mModel.getPhotoFromCursorByIndex(index);
+//            photoLinkedList.add(photo);
+//        }
+//
+//        OnDialogFinishListener listener = getOnDialogFinishListener();
+//        if (listener != null) {
+//            listener.onDialogFinish(photoLinkedList);
+//        }
+//        getActivity().onBackPressed();
     }
 }
